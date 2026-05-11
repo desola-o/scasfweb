@@ -124,17 +124,7 @@
         .hero-tag { font-size: var(--text-xs); font-variation-settings: 'wght' 520; letter-spacing: 0.07em; text-transform: uppercase; border: 1px solid rgba(255, 255, 255, 0.22); padding: 6px 14px 6px 12px; border-radius: var(--r-pill); display: inline-flex; align-items: center; gap: 9px; margin-bottom: 22px; background: rgba(255,255,255,0.05); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
         .pulse-dot { width: 6px; height: 6px; background: var(--lime); border-radius: 50%; animation: pulse-green 2.2s infinite; }
         @keyframes pulse-green { 0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(203, 243, 91, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(203, 243, 91, 0); } 100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(203, 243, 91, 0); } }
-        
-        /* Unified Major Header Typography */
-        .hero h1 { 
-            font-size: clamp(2.4rem, 5vw, 4rem); 
-            font-variation-settings: 'wght' 480; 
-            line-height: 1.08; 
-            letter-spacing: -0.025em; 
-            margin-bottom: 22px; 
-            text-transform: uppercase;
-        }
-        
+        .hero h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-variation-settings: 'wght' 480; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 22px; }
         .hero p { font-size: clamp(0.95rem, 1.5vw, 1.1rem); font-variation-settings: 'wght' 380; line-height: 1.65; opacity: 0.88; margin-bottom: 32px; max-width: 480px; }
 
         .glass-card { background: rgba(30, 30, 30, 0.45); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255, 255, 255, 0.11); border-radius: 28px; padding: 32px; max-width: 420px; justify-self: end; position: relative; overflow: hidden; box-shadow: 0 12px 50px rgba(0, 0, 0, 0.35); animation: fadeUp 0.9s 0.15s var(--ease) both; }
@@ -247,14 +237,12 @@
             flex-shrink: 0;
         }
 
-        /* Unified Major Headers - matching .hero h1 */
-        .ui-section h2, .team-header-left h2 {
+        .ui-section h2 {
             font-size: clamp(2rem, 4vw, 3rem);
-            font-variation-settings: 'wght' 480;
-            line-height: 1.08;
-            letter-spacing: -0.025em;
+            font-variation-settings: 'opsz' 48, 'wdth' 100, 'wght' 600;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
             color: var(--text-dark);
-            text-transform: uppercase;
         }
 
         .header-desc {
@@ -372,6 +360,14 @@
         }
 
         .team-header-left .ui-tag { margin-bottom: 12px; }
+
+        .team-header-left h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-variation-settings: 'opsz' 48, 'wdth' 100, 'wght' 600;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            color: var(--text-dark);
+        }
 
         .team-header-left h2 .text-gray { color: var(--text-muted); }
 
@@ -629,15 +625,13 @@
             background: var(--lime);
         }
 
-        /* Unified Major Header - matched to .hero h1 */
         .newsletter-info h2 {
             font-size: clamp(1.9rem, 3.5vw, 2.8rem);
-            font-variation-settings: 'wght' 480;
-            line-height: 1.08;
+            font-variation-settings: 'opsz' 48, 'wdth' 100, 'wght' 600;
+            line-height: 1.1;
             letter-spacing: -0.025em;
             color: var(--text-light);
             margin-bottom: 14px;
-            text-transform: uppercase;
         }
 
         .newsletter-info p {
@@ -940,13 +934,13 @@
         </div>
         <div class="nav-wrapper" id="nav-wrapper">
             <nav>
-                <a href="#">About us</a>
-                <a href="#">Our stories</a>
-                <a href="#">Advocacy</a>
-                <a href="#">Community hub</a>
-                <a href="#">Learning</a>
-                <a href="#faq">FAQs</a>
-                <a href="#">Contact</a>
+                <a href="https://sicklecellawarenessfoundation.org/about">About us</a>
+                <a href="https://sicklecellawarenessfoundation.org/stories">Our stories</a>
+                <a href="https://sicklecellawarenessfoundation.org/advocacy">Advocacy</a>
+                <a href="https://sicklecellawarenessfoundation.org/community">Community hub</a>
+                <a href="https://sicklecellawarenessfoundation.org/learning">Learning</a>
+                <a href="https://sicklecellawarenessfoundation.org/faqs">FAQs</a>
+                <a href="https://sicklecellawarenessfoundation.org/contact">Contact</a>
             </nav>
             <div class="nav-actions">
                 <a href="https://chat.whatsapp.com/B9sLilTEEoEGB42D48Owia" target="_blank" class="btn-login">
@@ -981,7 +975,7 @@
                 <div class="card-content-wrapper" id="card-content-wrapper">
                     <h3 id="card-title">Our mission</h3>
                     <p id="card-text">Sickle Cell Awareness &amp; Support Foundation exists to amplify real stories, educate with honesty, and advocate for inclusive schools, workplaces, and communities where people living with sickle cell are supported with dignity and understanding.</p>
-                    <a href="#" class="learn-more">Learn more →</a>
+                    <a href="https://sicklecellawarenessfoundation.org/about" class="learn-more">Learn more →</a>
                 </div>
             </div>
         </div>
@@ -1033,7 +1027,7 @@
                         <h3 class="card-title">Origin</h3>
                         <p class="card-desc">Created from lived experience navigating life with sickle cell while building a career, nurturing community, and learning what it means to live fully.</p>
                         <div class="card-divider"></div>
-                        <button class="card-btn">Read the origin story</button>
+                        <button class="card-btn" onclick="window.location.href='https://sicklecellawarenessfoundation.org/about'">Read the origin story</button>
                     </div>
                 </div>
 
@@ -1048,7 +1042,7 @@
                         <h3 class="card-title">Shifting focus</h3>
                         <p class="card-desc">For a long time, conversations centered on fear. We widen that conversation to share honest stories and offer clear, empowering education.</p>
                         <div class="card-divider"></div>
-                        <button class="card-btn">Explore education</button>
+                        <button class="card-btn" onclick="window.location.href='https://sicklecellawarenessfoundation.org/learning'">Explore education</button>
                     </div>
                 </div>
 
@@ -1083,7 +1077,7 @@
                         <h3 class="card-title">Advocacy in action</h3>
                         <p class="card-desc">We actively advocate for inclusive schools, workplaces, and communities that support people living with sickle cell with true dignity.</p>
                         <div class="card-divider"></div>
-                        <button class="card-btn">Our advocacy work</button>
+                        <button class="card-btn" onclick="window.location.href='https://sicklecellawarenessfoundation.org/advocacy'">Our advocacy work</button>
                     </div>
                 </div>
 
@@ -1325,9 +1319,9 @@
             <div class="footer-col">
                 <h4>Foundation</h4>
                 <ul>
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Our stories</a></li>
-                    <li><a href="#">Our team</a></li>
+                    <li><a href="https://sicklecellawarenessfoundation.org/about">About us</a></li>
+                    <li><a href="https://sicklecellawarenessfoundation.org/stories">Our stories</a></li>
+                    <li><a href="https://sicklecellawarenessfoundation.org/about">Our team</a></li>
                     <li><a href="#">Careers</a></li>
                 </ul>
             </div>
@@ -1335,9 +1329,9 @@
             <div class="footer-col">
                 <h4>Community</h4>
                 <ul>
-                    <li><a href="#">Community hub</a></li>
+                    <li><a href="https://sicklecellawarenessfoundation.org/community">Community hub</a></li>
                     <li><a href="#">Events &amp; workshops</a></li>
-                    <li><a href="#">Advocacy work</a></li>
+                    <li><a href="https://sicklecellawarenessfoundation.org/advocacy">Advocacy work</a></li>
                     <li><a href="#">Volunteer</a></li>
                 </ul>
             </div>
@@ -1345,10 +1339,10 @@
             <div class="footer-col">
                 <h4>Resources</h4>
                 <ul>
-                    <li><a href="#">Learning center</a></li>
-                    <li><a href="#">Articles &amp; news</a></li>
-                    <li><a href="#faq">FAQs</a></li>
-                    <li><a href="#">Contact us</a></li>
+                    <li><a href="https://sicklecellawarenessfoundation.org/learning">Learning center</a></li>
+                    <li><a href="https://sicklecellawarenessfoundation.org/stories">Articles &amp; news</a></li>
+                    <li><a href="https://sicklecellawarenessfoundation.org/faqs">FAQs</a></li>
+                    <li><a href="https://sicklecellawarenessfoundation.org/contact">Contact us</a></li>
                 </ul>
             </div>
         </div>
