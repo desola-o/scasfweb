@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sickle Cell Awareness &amp; Support Foundation (SCASF)</title>
-    <meta name="description" content="Empowering lives beyond the crisis. SCASF is a space for learning, listening, and building a more inclusive future for people living with sickle cell.">
+    
+    <!-- SEO & Metadata -->
+    <title>Why No Two People Living With Sickle Cell Have the Same Experience | SCASF</title>
+    <meta name="description" content="Living with sickle cell is deeply individual. Read why no two people living with sickle cell have the exact same experience.">
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="https://primary.jwwb.nl/public/t/e/b/temp-phgcdwbfzcsnurmrysqy/image-2-standard.jpg">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,75..125,100..1000&display=swap" rel="stylesheet">
@@ -19,16 +24,15 @@
             --lime-hover:     #b9e344;
             --lime-shadow:    rgba(203, 243, 91, 0.28);
 
-            --text-dark:      #0f172a;
+            --text-dark:      #0f172a; 
             --text-mid:       #475569;
-            --text-muted:     #94a3b8;
+            --text-muted:     #94a3b8; 
             --text-light:     #ffffff;
 
             --bg-white:       #ffffff;
-            --bg-page:        #f8fafc;
-            --bg-border:      #e8edf4;
+            --bg-page:        #f8fafc; 
 
-            --r-xl:           24px;
+            --r-xl:           24px; 
             --r-lg:           16px;
             --r-md:           12px;
             --r-pill:         999px;
@@ -77,8 +81,7 @@
             to   { opacity: 1; transform: translateY(0); }
         }
         .reveal {
-            opacity: 0;
-            transform: translateY(30px);
+            opacity: 0; transform: translateY(30px);
             transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
         }
         .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -92,17 +95,17 @@
         .logo img { height: 34px; width: 34px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(255,255,255,0.25); position: relative; z-index: 2; }
         .logo .logo-text { opacity: 0; max-width: 0; overflow: hidden; transform: translateX(-10px); transition: all 0.4s var(--ease); display: inline-block; white-space: nowrap; }
         .logo.show-text .logo-text, .logo:hover .logo-text { opacity: 1; max-width: 100px; transform: translateX(0); margin-left: 10px; }
-
+        
         .nav-wrapper { display: flex; align-items: center; gap: 40px; }
         nav { display: flex; gap: 28px; }
         nav a { font-size: var(--text-sm); font-variation-settings: 'opsz' 12, 'wdth' 100, 'wght' 450; opacity: 0.75; transition: opacity var(--t-fast) var(--ease); position: relative; padding-bottom: 3px; }
         nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background: var(--lime); border-radius: 2px; transition: width var(--t-base) var(--ease); }
-        nav a:hover { opacity: 1; }
-        nav a:hover::after { width: 100%; }
-
+        nav a:hover, nav a.active { opacity: 1; }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        
         .btn-login, .btn-primary { background: var(--lime); color: var(--text-dark); border-radius: var(--r-pill); font-size: var(--text-sm); font-variation-settings: 'opsz' 12, 'wdth' 100, 'wght' 550; display: inline-flex; align-items: center; white-space: nowrap; transition: all var(--t-base) var(--ease); }
         .btn-login { padding: 10px 22px; gap: 8px; }
-        .btn-primary { padding: 13px 26px; gap: 10px; }
+        .btn-primary { padding: 13px 26px; gap: 10px; border: none; cursor: pointer; font-family: inherit; }
         .btn-login:hover, .btn-primary:hover { background: var(--lime-hover); transform: translateY(-2px); box-shadow: 0 6px 18px var(--lime-shadow); }
         .btn-login .dot { width: 6px; height: 6px; background: var(--text-dark); border-radius: 50%; }
         .btn-primary .arrow { background: var(--text-dark); color: var(--lime); width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; transition: transform var(--t-base) var(--ease-spring); }
@@ -115,825 +118,175 @@
         .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
         /* ============================================================
-           HERO SECTION
+           ARTICLE HERO SECTION
         ============================================================ */
-        .hero { position: relative; min-height: 100svh; display: flex; align-items: center; padding: 140px 5% 100px; background: linear-gradient(160deg, rgba(10, 10, 10, 0.55) 0%, rgba(10, 10, 10, 0.80) 100%), url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop') center / cover; color: var(--text-light); }
-        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to top, rgba(0,0,0,0.35), transparent); pointer-events: none; z-index: 1; }
-        .hero-content { display: grid; grid-template-columns: 1.15fr 1fr; gap: 60px; width: 100%; align-items: end; position: relative; z-index: 2; }
-        .hero-text { animation: fadeUp 0.9s var(--ease) both; }
-        .hero-tag { font-size: var(--text-xs); font-variation-settings: 'wght' 520; letter-spacing: 0.07em; text-transform: uppercase; border: 1px solid rgba(255, 255, 255, 0.22); padding: 6px 14px 6px 12px; border-radius: var(--r-pill); display: inline-flex; align-items: center; gap: 9px; margin-bottom: 22px; background: rgba(255,255,255,0.05); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-        .pulse-dot { width: 6px; height: 6px; background: var(--lime); border-radius: 50%; animation: pulse-green 2.2s infinite; }
-        @keyframes pulse-green { 0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(203, 243, 91, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(203, 243, 91, 0); } 100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(203, 243, 91, 0); } }
-        .hero h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-variation-settings: 'wght' 480; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 22px; }
-        .hero p { font-size: clamp(0.95rem, 1.5vw, 1.1rem); font-variation-settings: 'wght' 380; line-height: 1.65; opacity: 0.88; margin-bottom: 32px; max-width: 480px; }
+        .article-hero { 
+            position: relative; 
+            min-height: 60svh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            padding: 140px 5% 100px; 
+            background: linear-gradient(160deg, rgba(10, 10, 10, 0.75) 0%, rgba(10, 10, 10, 0.9) 100%), url('https://i.ibb.co/Zp3N0Vcv/9487229.webp') center / cover; 
+            color: var(--text-light); 
+            text-align: center;
+        }
+        .article-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 150px; background: linear-gradient(to top, var(--bg-page), transparent); pointer-events: none; z-index: 1; }
+        
+        .hero-content { position: relative; z-index: 2; max-width: 900px; animation: fadeUp 0.9s var(--ease) both; }
+        
+        .article-meta { font-size: var(--text-sm); font-variation-settings: 'wght' 600; letter-spacing: 0.08em; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 24px; color: var(--lime); }
+        .article-meta svg { width: 16px; height: 16px; fill: currentColor; }
 
-        .glass-card { background: rgba(30, 30, 30, 0.45); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255, 255, 255, 0.11); border-radius: 28px; padding: 32px; max-width: 420px; justify-self: end; position: relative; overflow: hidden; box-shadow: 0 12px 50px rgba(0, 0, 0, 0.35); animation: fadeUp 0.9s 0.15s var(--ease) both; }
-        .glass-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(550px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(255, 255, 255, 0.11), transparent 40%); z-index: 0; pointer-events: none; transition: opacity 0.5s ease; }
-        .glass-card > * { position: relative; z-index: 1; }
-        .card-header { display: flex; justify-content: flex-end; align-items: center; margin-bottom: 22px; }
-        .nav-arrows { display: flex; gap: 4px; }
-        .arrow-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; color: rgba(255,255,255,0.55); width: 30px; height: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all var(--t-fast) var(--ease); }
-        .arrow-btn:hover { background: rgba(255,255,255,0.15); color: var(--text-light); transform: scale(1.1); }
-        .card-content-wrapper { transition: opacity 0.32s ease, transform 0.32s ease; opacity: 1; transform: translateX(0); }
-        .card-content-wrapper.slide-out-left { opacity: 0; transform: translateX(-36px); }
-        .card-content-wrapper.slide-out-right { opacity: 0; transform: translateX(36px); }
-        .card-content-wrapper.no-transition { transition: none !important; }
-        .glass-card h3 { font-size: var(--text-lg); font-variation-settings: 'wght' 620; margin-bottom: 14px; }
-        .glass-card p { font-size: var(--text-sm); line-height: 1.65; color: rgba(255,255,255,0.82); margin-bottom: 22px; }
-        .glass-card .learn-more { font-size: var(--text-sm); font-variation-settings: 'wght' 530; display: inline-flex; align-items: center; gap: 5px; transition: all var(--t-fast) var(--ease); }
-        .glass-card .learn-more:hover { color: var(--lime); gap: 9px; }
+        .article-hero h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-variation-settings: 'wght' 500; line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 22px; text-wrap: balance; }
 
         /* ============================================================
-           SCROLLING REELS
+           ARTICLE CONTENT WRAPPER
         ============================================================ */
-        .scrolling-reel { 
-            position: relative; 
-            width: 100%; 
-            padding: 14px 0; 
-            background: #0a0a0a; 
-            border-top: 1px solid rgba(255, 255, 255, 0.07); 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.07); 
-            z-index: 10; 
-            overflow: hidden; 
-            display: flex; 
+        .page-content { background-color: var(--bg-page); position: relative; z-index: 20; padding-bottom: 0; }
+
+        .article-body {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 60px 5% 100px;
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text-mid);
         }
-        
-        .hero .scrolling-reel {
-            position: absolute; 
-            bottom: 0; 
-            left: 0;
-            border-bottom: none; 
+
+        .article-body p {
+            margin-bottom: 24px;
         }
+
+        .article-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .article-body strong {
+            color: var(--text-dark);
+            font-variation-settings: 'wght' 600;
+        }
+
+        .article-body blockquote {
+            font-size: 1.4rem;
+            font-variation-settings: 'wght' 500;
+            line-height: 1.5;
+            color: var(--text-dark);
+            margin: 40px 0;
+            padding-left: 24px;
+            border-left: 4px solid var(--lime);
+            background: linear-gradient(90deg, rgba(203, 243, 91, 0.1) 0%, transparent 100%);
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 0 var(--r-md) var(--r-md) 0;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            font-variation-settings: 'wght' 650;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 40px;
+            transition: color var(--t-fast);
+        }
+        .back-link .arrow { transition: transform var(--t-base) var(--ease-spring); display: inline-block; }
+        .back-link:hover { color: #658117; }
+        .back-link:hover .arrow { transform: translateX(-6px); }
+
+        /* ============================================================
+           CTA SECTION (Reused)
+        ============================================================ */
+        .cta-section { padding: 100px 5%; margin: 0; background: linear-gradient(160deg, rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.9)), url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop') center / cover; position: relative; }
+        .cta-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); border-radius: var(--r-xl); padding: 80px 5%; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; overflow: hidden; max-width: 1000px; margin: 0 auto; color: var(--text-light); }
+        .cta-card::before { content: ''; position: absolute; top: -50%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%); pointer-events: none; }
         
+        .cta-card h2 { font-size: clamp(2rem, 4vw, 3rem); font-variation-settings: 'opsz' 48, 'wdth' 100, 'wght' 600; line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.02em; }
+        .cta-card p { color: rgba(255,255,255,0.85); font-size: 1.1rem; line-height: 1.7; max-width: 700px; margin-bottom: 40px; }
+
+        /* ============================================================
+           SCROLLING REEL
+        ============================================================ */
+        .scrolling-reel { width: 100%; padding: 24px 0; background: #141414; border-top: 1px solid rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.05); overflow: hidden; display: flex; position: relative; z-index: 20; }
         .scrolling-track { display: flex; white-space: nowrap; animation: scrollReel 40s linear infinite; }
         .scrolling-reel:hover .scrolling-track { animation-play-state: paused; }
-        .scrolling-track span { display: inline-flex; align-items: center; color: rgba(255,255,255,0.6); font-size: var(--text-xs); font-variation-settings: 'wght' 520; letter-spacing: 0.1em; text-transform: uppercase; }
-        .reel-dot { color: var(--lime); margin: 0 28px; opacity: 0.9; }
+        .scrolling-track span { display: inline-flex; align-items: center; color: rgba(255,255,255,0.6); font-size: 0.85rem; font-variation-settings: 'wght' 600; letter-spacing: 0.1em; text-transform: uppercase; }
+        .reel-dot { color: rgba(255,255,255,0.3); margin: 0 28px; font-size: 1.2rem; }
         @keyframes scrollReel { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-        /* ============================================================
-           MAIN CONTENT WRAPPER
-        ============================================================ */
-        .page-content {
-            background-color: var(--bg-page);
-            position: relative;
-            z-index: 20;
-        }
-
-        /* Shared Section Styles */
-        .ui-section {
-            padding: 100px 5%;
-            max-width: 1440px;
-            margin: 0 auto;
-        }
-
-        .ui-section.bg-alt {
-            background-color: var(--bg-white);
-            max-width: 100%;
-            padding-left: 5%;
-            padding-right: 5%;
-            border-top: 1px solid rgba(0,0,0,0.04);
-            border-bottom: 1px solid rgba(0,0,0,0.04);
-        }
-        .ui-section.bg-alt > .section-header,
-        .ui-section.bg-alt > .team-header-layout,
-        .ui-section.bg-alt > .card-grid,
-        .ui-section.bg-alt > .team-grid {
-            max-width: 1300px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 48px;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-
-        .header-text { max-width: 600px; }
-
-        .ui-tag {
-            color: var(--text-dark);
-            font-size: var(--text-xs);
-            font-variation-settings: 'wght' 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-        
-        .ui-tag::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--lime);
-            border-radius: 50%;
-            display: inline-block;
-            flex-shrink: 0;
-        }
-
-        .ui-section h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-variation-settings: 'opsz' 48, 'wdth' 100, 'wght' 600;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
-            color: var(--text-dark);
-        }
-
-        .header-desc {
-            font-size: 1.05rem;
-            color: var(--text-mid);
-            line-height: 1.6;
-            max-width: 480px;
-        }
-
-        /* ============================================================
-           CARD COMPONENT SYSTEM
-        ============================================================ */
-        .card-grid {
-            display: grid;
-            gap: 32px;
-        }
-
-        .story-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
-
-        .ui-card {
-            background: var(--bg-white);
-            border-radius: var(--r-xl);
-            overflow: hidden;
-            box-shadow: var(--shadow-card);
-            display: flex;
-            flex-direction: column;
-            transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
-            position: relative;
-            height: 100%;
-        }
-
-        .ui-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
-
-        @media (min-width: 768px) {
-            .founder-statement-card { grid-column: span 2; }
-        }
-
-        .card-img-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: var(--bg-border); }
-        .card-img-wrap.tall { aspect-ratio: 3/4; }
-        .card-img-wrap.square { aspect-ratio: 1/1; }
-
-        .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
-        .ui-card:hover .card-img-wrap img { transform: scale(1.05); }
-
-        .card-badge {
-            position: absolute; top: 16px; left: 16px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06); z-index: 2; cursor: pointer; transition: transform 0.2s var(--ease-spring), box-shadow 0.2s var(--ease);
-        }
-        .card-badge:hover { transform: scale(1.15) rotate(15deg); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
-        .card-badge:active { transform: scale(0.95); }
-        .card-badge svg { width: 16px; height: 16px; fill: #f59e0b; }
-
-        .card-content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
-        .card-title { font-size: 1.25rem; font-variation-settings: 'wght' 650; color: var(--text-dark); margin-bottom: 8px; line-height: 1.3; }
-        .card-desc { font-size: 0.9rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 20px; }
-
-        .card-meta-row { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
-        .meta-item { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text-mid); font-variation-settings: 'wght' 500; transition: color 0.3s; }
-        .meta-item.clickable-meta { cursor: pointer; user-select: none; }
-        .meta-item svg { width: 16px; height: 16px; stroke: var(--text-muted); stroke-width: 2; fill: transparent; transition: fill 0.3s ease, stroke 0.3s ease; }
-
-        @keyframes heartJump {
-            0% { transform: scale(1); }
-            30% { transform: scale(1.3) translateY(-3px); }
-            50% { transform: scale(0.9) translateY(0); }
-            70% { transform: scale(1.15) translateY(-1px); }
-            100% { transform: scale(1) translateY(0); }
-        }
-        .jump-animation { animation: heartJump 0.5s ease-out; }
-        .ui-card.dark-bleed .meta-item.clickable-meta.liked svg { fill: #ef4444; stroke: #ef4444; }
-
-        .card-divider { height: 1px; background: var(--bg-border); margin: auto -24px 20px -24px; width: calc(100% + 48px); }
-
-        .card-btn {
-            display: block; width: 100%; text-align: center; background: var(--text-dark); color: var(--text-light);
-            padding: 14px; border-radius: var(--r-pill); font-size: 0.9rem; font-variation-settings: 'wght' 600;
-            transition: all var(--t-fast) var(--ease); cursor: pointer; border: none;
-        }
-        .card-btn:hover { background: var(--lime); color: var(--text-dark); box-shadow: 0 6px 18px var(--lime-shadow); }
-
-        .ui-card.dark-bleed { color: var(--text-light); }
-        .ui-card.dark-bleed .card-img-wrap { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; }
-        .ui-card.dark-bleed::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, transparent 100%); z-index: 1; }
-        .ui-card.dark-bleed .card-content { position: relative; z-index: 2; justify-content: flex-end; padding-top: 180px; }
-        .ui-card.dark-bleed .card-title { color: var(--text-light); }
-        .ui-card.dark-bleed .card-desc { color: rgba(255,255,255,0.8); }
-        .ui-card.dark-bleed .card-divider { background: rgba(255,255,255,0.15); }
-        .ui-card.dark-bleed .meta-item { color: rgba(255,255,255,0.8); }
-        .ui-card.dark-bleed .meta-item svg { stroke: rgba(255,255,255,0.8); }
-
-        .glass-quote-icon {
-            width: 52px; height: 52px;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.4));
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(0,0,0,0.08);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06), inset 0 2px 4px rgba(255,255,255,1);
-        }
-        .glass-quote-icon svg { width: 24px; height: 24px; fill: var(--text-dark); }
-
-        /* ============================================================
-           TEAM SECTION
-        ============================================================ */
-        .team-header-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 48px;
-            align-items: end;
-        }
-
-        .team-header-left .ui-tag { margin-bottom: 12px; }
-
-        .team-header-left h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-variation-settings: 'opsz' 48, 'wdth' 100, 'wght' 600;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
-            color: var(--text-dark);
-        }
-
-        .team-header-left h2 .text-gray { color: var(--text-muted); }
-
-        .team-header-desc {
-            font-size: 1.05rem;
-            color: var(--text-mid);
-            line-height: 1.6;
-            max-width: 480px;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .team-member-card {
-            position: relative;
-            aspect-ratio: 3 / 3.6;
-            overflow: hidden;
-            border-radius: var(--r-xl); 
-            background-color: #d8e0ea;
-            cursor: pointer;
-            box-shadow: var(--shadow-card); 
-            transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease); 
-        }
-
-        .team-member-card:hover {
-            transform: translateY(-6px); 
-            box-shadow: var(--shadow-hover);
-        }
-
-        .team-member-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            inset: 0;
-            transition: transform 0.6s var(--ease);
-        }
-
-        .team-member-card:hover img { transform: scale(1.05); } 
-
-        .team-member-card .placeholder-svg {
-            width: 52%;
-            height: 52%;
-            fill: #b8c4d4;
-            position: absolute;
-            bottom: -4%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .team-card-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.18) 55%, transparent 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 24px;
-            color: var(--text-light);
-            z-index: 2;
-        }
-
-        .team-info { margin-bottom: 12px; }
-
-        .team-info h4 {
-            font-size: 1.05rem;
-            font-variation-settings: 'wght' 650;
-            margin-bottom: 3px;
-            color: var(--text-light);
-            line-height: 1.2;
-        }
-
-        .team-info p {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.72);
-            margin: 0;
-        }
-
-        .team-footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            padding-top: 12px;
-        }
-
-        .team-footer a {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            font-size: 0.8rem;
-            font-variation-settings: 'wght' 520;
-            color: rgba(255,255,255,0.75);
-            transition: color var(--t-fast) var(--ease);
-        }
-
-        .team-footer a:hover { color: var(--lime); }
-
-        .team-footer svg {
-            width: 14px;
-            height: 14px;
-            stroke: currentColor;
-            stroke-width: 2;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            flex-shrink: 0;
-        }
-
-        /* ============================================================
-           FAQ ACCORDION
-        ============================================================ */
-        .faq-container {
-            max-width: 900px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .faq-item {
-            background: var(--bg-white);
-            border: 1px solid var(--bg-border);
-            border-radius: var(--r-xl); 
-            overflow: hidden;
-            transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease), border-color var(--t-base) var(--ease);
-            box-shadow: var(--shadow-card); 
-        }
-
-        .faq-item:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .faq-item.active {
-            border-color: rgba(0,0,0,0.08);
-            box-shadow: var(--shadow-hover);
-            transform: none; 
-        }
-
-        .faq-question {
-            padding: 24px 28px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            font-size: 1rem;
-            font-variation-settings: 'wght' 620;
-            color: var(--text-dark);
-            background: transparent;
-            user-select: none;
-            gap: 16px;
-        }
-
-        .faq-answer {
-            max-height: 0;
-            padding: 0 28px;
-            opacity: 0;
-            transition: all 0.4s var(--ease);
-            color: var(--text-mid);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-            padding: 24px 28px; 
-            opacity: 1;
-        }
-
-        .faq-icon {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: var(--bg-page);
-            border: 1px solid var(--bg-border);
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
-        }
-
-        .faq-item.active .faq-icon {
-            background: var(--lime);
-            border-color: var(--lime);
-        }
-
-        .faq-icon::before, .faq-icon::after {
-            content: '';
-            position: absolute;
-            background: var(--text-dark);
-            border-radius: 2px;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        .faq-icon::before { width: 10px; height: 1.5px; }
-        .faq-icon::after  { width: 1.5px; height: 10px; }
-        .faq-item.active .faq-icon::after { transform: rotate(90deg); opacity: 0; }
-
-        .faq-item.active .faq-question {
-            border-bottom: 1px solid var(--bg-border);
-            padding-bottom: 0;
-        }
-
-        /* ============================================================
-           NEWSLETTER
-        ============================================================ */
-        .newsletter-section {
-            position: relative;
-            background: linear-gradient(160deg, rgba(10,10,10,0.78) 0%, rgba(10,10,10,0.92) 100%),
-                        url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop') center / cover fixed;
-            padding: 0;
-            z-index: 20;
-        }
-
-        .newsletter-inner {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 100px 5%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 60px;
-            flex-wrap: wrap;
-        }
-
-        .newsletter-info {
-            max-width: 480px;
-            color: var(--text-light);
-        }
-
-        .newsletter-info .ui-tag {
-            color: rgba(255,255,255,0.6);
-            font-size: var(--text-xs);
-            font-variation-settings: 'wght' 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .newsletter-info .ui-tag::before {
-            background: var(--lime);
-        }
-
-        .newsletter-info h2 {
-            font-size: clamp(1.9rem, 3.5vw, 2.8rem);
-            font-variation-settings: 'opsz' 48, 'wdth' 100, 'wght' 600;
-            line-height: 1.1;
-            letter-spacing: -0.025em;
-            color: var(--text-light);
-            margin-bottom: 14px;
-        }
-
-        .newsletter-info p {
-            color: rgba(255,255,255,0.72);
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-
-        .newsletter-form-wrap {
-            background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 28px; 
-            padding: 36px;
-            flex: 1;
-            max-width: 480px;
-            min-width: 300px;
-            box-shadow: 0 12px 50px rgba(0,0,0,0.28);
-        }
-
-        .newsletter-form-wrap p {
-            font-size: var(--text-sm);
-            color: rgba(255,255,255,0.55);
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .newsletter-form {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .newsletter-form input {
-            width: 100%;
-            padding: 14px 20px;
-            border-radius: var(--r-pill);
-            border: 1px solid rgba(255,255,255,0.14);
-            background: rgba(255,255,255,0.07);
-            color: var(--text-light);
-            outline: none;
-            font-size: 0.95rem;
-            font-family: inherit;
-            font-variation-settings: 'wght' 400;
-            transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast);
-        }
-
-        .newsletter-form input::placeholder { color: rgba(255,255,255,0.38); }
-
-        .newsletter-form input:focus {
-            border-color: rgba(203,243,91,0.5);
-            background: rgba(255,255,255,0.1);
-            box-shadow: 0 0 0 3px rgba(203,243,91,0.12);
-        }
-
-        .newsletter-form button {
-            background: var(--lime);
-            color: var(--text-dark);
-            border: none;
-            border-radius: var(--r-pill);
-            padding: 14px 28px;
-            font-size: 0.95rem;
-            font-variation-settings: 'wght' 600;
-            font-family: inherit;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all var(--t-fast) var(--ease);
-        }
-
-        .newsletter-form button:hover {
-            background: var(--lime-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px var(--lime-shadow);
-        }
-
-        .newsletter-form button .arrow {
-            background: var(--text-dark);
-            color: var(--lime);
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            transition: transform var(--t-base) var(--ease-spring);
-        }
-
-        .newsletter-form button:hover .arrow { transform: translateX(3px); }
 
         /* ============================================================
            FOOTER
         ============================================================ */
-        .site-footer {
-            background: linear-gradient(180deg, rgba(10,10,10,0.95) 0%, #050a0f 100%),
-                        url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop') center / cover;
-            color: var(--text-light);
-            /* Increased footer padding for more vertical length */
-            padding: 120px 5% 48px;
-            position: relative;
-            z-index: 20;
-        }
-
-        .site-footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 5%;
-            right: 5%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(203,243,91,0.25), transparent);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 50px;
-            max-width: 1440px;
-            /* Increased bottom margin */
-            margin: 0 auto 80px;
-        }
-
+        .site-footer { background: linear-gradient(160deg, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0.98) 100%), url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop') center / cover; color: var(--text-light); padding: 80px 5% 30px; position: relative; z-index: 20; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; max-width: 1440px; margin: 0 auto 60px; }
         .footer-brand-col { max-width: 360px; }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-variation-settings: 'opsz' 16, 'wdth' 100, 'wght' 650;
-            font-size: 1.1rem;
-            letter-spacing: 0.02em;
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
-
-        .footer-logo img {
-            height: 36px;
-            width: 36px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1.5px solid rgba(255,255,255,0.22);
-        }
-
-        .footer-brand-col > p {
-            color: rgba(255,255,255,0.6);
-            font-size: 0.92rem;
-            line-height: 1.65;
-            margin-bottom: 28px;
-        }
-
-        .footer-socials { display: flex; gap: 10px; }
-
-        .footer-socials a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all var(--t-fast) var(--ease);
-            color: var(--text-light);
-        }
-
-        .footer-socials a:hover {
-            background: var(--lime);
-            border-color: var(--lime);
-            color: var(--text-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px var(--lime-shadow);
-        }
-
-        .footer-socials svg { width: 16px; height: 16px; fill: currentColor; }
-
-        .footer-col h4 {
-            font-size: 0.8rem;
-            font-variation-settings: 'wght' 650;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.45);
-            margin-bottom: 20px;
-        }
-
-        /* Increased vertical gap for links to elongate the footer naturally */
-        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
-
-        .footer-col ul a {
-            color: rgba(255,255,255,0.7);
-            font-size: 0.92rem;
-            font-variation-settings: 'wght' 430;
-            transition: all var(--t-fast) var(--ease);
-            display: inline-flex;
-            align-items: center;
-            gap: 0;
-        }
-
-        .footer-col ul a:hover {
-            color: var(--text-light);
-            gap: 4px;
-        }
-
-        .footer-col ul li { position: relative; }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(255,255,255,0.07);
-            padding-top: 28px;
-            max-width: 1440px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-
-        .footer-bottom p {
-            color: rgba(255,255,255,0.35);
-            font-size: 0.82rem;
-        }
-
+        .footer-logo { display: flex; align-items: center; gap: 10px; font-variation-settings: 'opsz' 16, 'wdth' 100, 'wght' 650; font-size: 1.25rem; letter-spacing: 0.02em; color: var(--text-light); margin-bottom: 24px; }
+        .footer-logo img { height: 38px; width: 38px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(255,255,255,0.25); }
+        .footer-brand-col p { color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.6; margin-bottom: 28px; }
+        .footer-socials { display: flex; gap: 12px; }
+        .footer-socials a { width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid transparent; display: flex; align-items: center; justify-content: center; transition: all var(--t-fast) var(--ease); color: var(--text-light); }
+        .footer-socials a:hover { background: var(--lime); border-color: var(--lime); color: var(--text-dark); transform: translateY(-3px); box-shadow: 0 8px 24px var(--lime-shadow); }
+        .footer-socials svg { width: 18px; height: 18px; fill: currentColor; }
+        .footer-col h4 { font-size: 1.1rem; font-variation-settings: 'wght' 600; color: var(--text-light); margin-bottom: 24px; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+        .footer-col ul a { color: rgba(255,255,255,0.7); font-size: 0.95rem; transition: all var(--t-fast) var(--ease); }
+        .footer-col ul a:hover { color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; max-width: 1440px; margin: 0 auto; flex-wrap: wrap; gap: 20px; }
+        .footer-bottom p { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
         .footer-bottom-links { display: flex; gap: 24px; }
+        .footer-bottom-links a { color: rgba(255,255,255,0.5); font-size: 0.85rem; transition: color var(--t-fast); }
+        .footer-bottom-links a:hover { color: var(--text-light); text-shadow: 0 0 8px rgba(255, 255, 255, 0.3); }
 
-        .footer-bottom-links a {
-            color: rgba(255,255,255,0.35);
-            font-size: 0.82rem;
-            transition: color var(--t-fast);
-        }
-
-        .footer-bottom-links a:hover { color: rgba(255,255,255,0.75); }
-
-        /* ============================================================
-           RESPONSIVE
-        ============================================================ */
+        /* RESPONSIVE DESIGN */
         @media (max-width: 1150px) {
             .hamburger { display: flex; }
-            .nav-wrapper {
-                position: fixed; top: 0; right: -100%; width: 100%; height: 100dvh;
-                background: rgba(10, 10, 10, 0.25); 
-                backdrop-filter: blur(20px); 
-                -webkit-backdrop-filter: blur(20px);
-                flex-direction: column; justify-content: center; align-items: center;
-                transition: right var(--t-base) var(--ease); gap: 28px; z-index: 100;
-            }
+            .nav-wrapper { position: fixed; top: 0; right: -100%; width: 100%; height: 100dvh; background: rgba(30, 30, 30, 0.45); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); flex-direction: column; justify-content: center; align-items: center; transition: right var(--t-base) var(--ease); gap: 28px; z-index: 100; }
             .nav-wrapper.active { right: 0; }
             nav { flex-direction: column; align-items: center; gap: 20px; }
-            nav a { font-size: 1.15rem; opacity: 0.9; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
-            .nav-actions { margin-top: 8px; }
+            nav a { font-size: 1.15rem; opacity: 0.7; }
         }
-
         @media (max-width: 992px) {
-            .hero-content { grid-template-columns: 1fr; gap: 40px; align-items: start; }
-            .glass-card { justify-self: start; width: 100%; max-width: 540px; }
-            .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-            .header-desc { max-width: 100%; }
             .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-            .team-grid { grid-template-columns: repeat(2, 1fr); }
-            .team-header-layout { grid-template-columns: 1fr; gap: 16px; }
-            .newsletter-inner { flex-direction: column; gap: 40px; }
-            .newsletter-form-wrap { max-width: 100%; width: 100%; }
         }
-
         @media (max-width: 768px) {
             header { padding: 22px 5%; }
-            .hero { padding: 120px 5% 90px; }
-            .ui-section { padding: 70px 5%; }
-            .story-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-            .team-grid { grid-template-columns: repeat(2, 1fr); }
+            .article-hero { padding: 140px 5% 80px; }
+            .cta-card { padding: 50px 5%; }
             .footer-grid { grid-template-columns: 1fr; gap: 40px; }
             .footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
         }
-
         @media (max-width: 480px) {
-            .hero { padding: 100px 5% 80px; }
-            .glass-card { padding: 24px; }
-            .card-content { padding: 20px; }
-            .faq-question { padding: 20px 22px; }
-            .faq-answer { padding: 0 22px; }
-            .faq-item.active .faq-answer { padding: 20px 22px; }
-            .team-grid { grid-template-columns: 1fr; }
+            .article-hero h1 { font-size: 2.2rem; }
+            .cta-card h2 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
     <!-- HEADER / NAVBAR -->
-    <header style="background: var(--text-dark); position: fixed;">
-        <!-- Modified to directly link to homepage -->
-        <a href="https://sicklecellawarenessfoundation.org" class="logo" id="header-logo">
-            <img src="https://primary.jwwb.nl/public/t/e/b/temp-phgcdwbfzcsnurmrysqy/image-2-standard.jpg" alt="SCASF Logo" id="logo-butterfly">
-            <span class="logo-text">SCASF</span>
-        </a>
-        
+    <header>
+        <div class="logo" id="header-logo">
+            <a href="/">
+                <img src="https://primary.jwwb.nl/public/t/e/b/temp-phgcdwbfzcsnurmrysqy/image-2-standard.jpg" alt="SCASF Logo" id="logo-butterfly">
+            </a>
+            <a href="/" class="logo-text">SCASF</a>
+        </div>
         <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" aria-expanded="false">
             <span></span><span></span><span></span>
         </div>
         <div class="nav-wrapper" id="nav-wrapper">
             <nav>
                 <a href="https://sicklecellawarenessfoundation.org/">Home</a>
-                <a href="https://sicklecellawarenessfoundation.org/about">About us</a>
-                <a href="https://sicklecellawarenessfoundation.org/stories">Our stories</a>
-                <a href="https://sicklecellawarenessfoundation.org/advocacy">Advocacy</a>
-                <a href="https://sicklecellawarenessfoundation.org/community">Community hub</a>
-                <a href="https://sicklecellawarenessfoundation.org/learning">Learning</a>
-                <a href="https://sicklecellawarenessfoundation.org/faqs">FAQs</a>
-                <a href="https://sicklecellawarenessfoundation.org/contact">Contact</a>
+                <a href="/about">About us</a>
+                <a href="/stories" class="active">Our stories</a>
+                <a href="/advocacy">Advocacy</a>
+                <a href="/community">Community hub</a>
+                <a href="/learning">Learning</a>
+                <a href="/faqs">FAQs</a>
+                <a href="/contact">Contact</a>
             </nav>
             <div class="nav-actions">
                 <a href="https://chat.whatsapp.com/B9sLilTEEoEGB42D48Owia" target="_blank" class="btn-login">
@@ -942,54 +295,73 @@
             </div>
         </div>
     </header>
-<main class='page-content' style='background: var(--bg-page);'>
 
-    <section class="ui-section bg-alt" style="padding-top: 160px; min-height: 80vh;">
-        <div style="max-width: 800px; margin: 0 auto; background: var(--bg-white); padding: 50px 8%; border-radius: var(--r-xl); box-shadow: var(--shadow-card);">
-            <div class="ui-tag">Article</div>
-            <h1 style="font-size: clamp(2rem, 4vw, 2.8rem); font-variation-settings: 'wght' 650; margin-bottom: 12px; line-height: 1.15; color: var(--text-dark);">Why No Two People Living With Sickle Cell Have the Same Experience</h1>
-            <p style="color: var(--text-muted); font-size: 0.95rem; font-variation-settings: 'wght' 500; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--bg-border);">Published on 10 January 2026 at 19:45</p>
-            
-            <div class="article-body" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-mid); display: flex; flex-direction: column; gap: 20px;">
-                
-<p>I can never get tired of saying is this:</p>
-<p><strong>"no two people living with sickle cell have the same experience."</strong></p>
-<p>It’s one of the biggest misunderstandings I see and one of the most important conversations we need to have.</p>
-<p>So often, sickle cell is spoken about as if it’s a single story, a fixed outcome, or a one-size-fits-all experience. But that couldn’t be further from the truth. Living with sickle cell is deeply individual, shaped by a combination of factors that interact differently for each person.</p>
-<p>First off, not everyone even has the same genetic type of sickle cell. Some people live with HbSS, others with HbSC, HbS beta thalassemia, and other variations. These differences alone can influence how often someone experiences pain, fatigue, or other complications.</p>
-<p>But genetics are only part of the picture.</p>
-<p>There are so many other things quietly shaping a person’s experience; things like access to healthcare, early diagnosis, medication, environment, stress levels, mental and emotional wellbeing, nutrition, hydration, and even climate. Over time, age and life stage also play a role. What sickle cell looks like in childhood can be very different from what it looks like in adulthood.</p>
-<p>And then there’s life itself.</p>
-<p>Support systems. Work demands. School environments. How often someone is believed when they say they’re in pain. Whether they feel safe enough to ask for help. All of these things matter deeply. This is why comparison can be so harmful. Just because one person experiences sickle cell a certain way doesn’t mean another will, even if their diagnosis sounds similar on paper. Also, just because someone appears “fine” on the outside doesn’t mean they’re not managing a lot behind the scenes. That’s also why support needs to look different for different people.</p>
-<p>The most helpful thing we can do, whether as friends, family members, employers, teachers, or allies is to ask rather than assume. To listen rather than project. To support the person in front of us, not the version of sickle cell we think we understand based on past knowledge or someone else’s story.</p>
-<p>Living with sickle cell is not a template.<br>It’s a lived, evolving experience.</p>
-
+    <!-- ARTICLE HERO -->
+    <section class="article-hero">
+        <div class="hero-content">
+            <div class="article-meta">
+                <svg viewBox="0 0 24 24"><path d="M19 4h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+                10 Jan 2026 • 19:45
             </div>
-            
-            <div style="margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--bg-border);">
-                <a href="https://sicklecellawarenessfoundation.org/stories" class="btn-primary" style="display: inline-flex;"><span class="arrow">←</span> Back to stories</a>
-            </div>
+            <h1>Why No Two People Living With Sickle Cell Have the Same Experience</h1>
         </div>
     </section>
-    
-</main>
-<!-- NEWSLETTER -->
-        <section class="newsletter-section">
-            <div class="newsletter-inner reveal">
-                <div class="newsletter-info">
-                    <div class="ui-tag">Stay connected</div>
-                    <h2>Stay in<br>the loop</h2>
-                    <p>Subscribe for community updates, advocacy news, learning resources, and honest stories delivered straight to your inbox.</p>
-                </div>
-                <div class="newsletter-form-wrap">
-                    <p>Join thousands already in the community. No spam, ever.</p>
-                    <form id="newsletter-form" class="newsletter-form" action="https://formspree.io/f/mdabywqo" method="POST">
-                        <input type="email" name="email" placeholder="Enter your email address" required aria-label="Email Address">
-                        <button type="submit" id="newsletter-btn">Subscribe Now <span class="arrow">→</span></button>
-                    </form>
-                </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="page-content">
+
+        <!-- ARTICLE BODY -->
+        <article class="article-body reveal">
+            <a href="/stories" class="back-link"><span class="arrow">←</span> Back to Stories</a>
+            
+            <p>I can never get tired of saying is this:</p>
+            
+            <blockquote>
+                "No two people living with sickle cell have the same experience."
+            </blockquote>
+            
+            <p>It’s one of the biggest misunderstandings I see and one of the most important conversations we need to have.</p>
+            <p>So often, sickle cell is spoken about as if it’s a single story, a fixed outcome, or a one-size-fits-all experience. But that couldn’t be further from the truth. Living with sickle cell is deeply individual, shaped by a combination of factors that interact differently for each person.</p>
+            <p>First off, not everyone even has the same genetic type of sickle cell. Some people live with HbSS, others with HbSC, HbS beta thalassemia, and other variations. These differences alone can influence how often someone experiences pain, fatigue, or other complications.</p>
+            <p><strong>But genetics are only part of the picture.</strong></p>
+            <p>There are so many other things quietly shaping a person’s experience; things like access to healthcare, early diagnosis, medication, environment, stress levels, mental and emotional wellbeing, nutrition, hydration, and even climate. Over time, age and life stage also play a role. What sickle cell looks like in childhood can be very different from what it looks like in adulthood.</p>
+            <p>And then there’s life itself.</p>
+            <p>Support systems. Work demands. School environments. How often someone is believed when they say they’re in pain. Whether they feel safe enough to ask for help. All of these things matter deeply. This is why comparison can be so harmful. Just because one person experiences sickle cell a certain way doesn’t mean another will, even if their diagnosis sounds similar on paper. Also, just because someone appears “fine” on the outside doesn’t mean they’re not managing a lot behind the scenes. That’s also why support needs to look different for different people.</p>
+            <p>The most helpful thing we can do, whether as friends, family members, employers, teachers, or allies is to ask rather than assume. To listen rather than project. To support the person in front of us, not the version of sickle cell we think we understand based on past knowledge or someone else’s story.</p>
+            <p><strong>Living with sickle cell is not a template.</strong></p>
+            <p>It’s a lived, evolving experience.</p>
+        </article>
+
+        <!-- CTA SECTION -->
+        <section class="cta-section reveal">
+            <div class="cta-card">
+                <h2>Join our movement for change</h2>
+                <p>After reading our stories, the single most important thing you can do is join us. Become part of a supportive community dedicated to awareness, education, and advocacy. Whether you're living with sickle cell, a family member, or an ally, your voice and support can help us create a world where everyone can live full, empowered lives.</p>
+                <a href="https://chat.whatsapp.com/B9sLilTEEoEGB42D48Owia" target="_blank" class="btn-primary" style="padding: 16px 36px; font-size: 1.05rem;">
+                    Become a member <span class="arrow">→</span>
+                </a>
             </div>
         </section>
+
+        <!-- SCROLLING REEL -->
+        <div class="scrolling-reel">
+            <div class="scrolling-track">
+                <span>
+                    SHARING AUTHENTIC STORIES <span class="reel-dot">•</span>
+                    PROVIDING COMMUNITY SUPPORT <span class="reel-dot">•</span>
+                    EDUCATING SCHOOLS &amp; INSTITUTIONS <span class="reel-dot">•</span>
+                    FOSTERING DIGNITY &amp; UNDERSTANDING <span class="reel-dot">•</span>
+                    ADVOCATING FOR INCLUSIVE WORKPLACES <span class="reel-dot">•</span>
+                </span>
+                <span>
+                    SHARING AUTHENTIC STORIES <span class="reel-dot">•</span>
+                    PROVIDING COMMUNITY SUPPORT <span class="reel-dot">•</span>
+                    EDUCATING SCHOOLS &amp; INSTITUTIONS <span class="reel-dot">•</span>
+                    FOSTERING DIGNITY &amp; UNDERSTANDING <span class="reel-dot">•</span>
+                    ADVOCATING FOR INCLUSIVE WORKPLACES <span class="reel-dot">•</span>
+                </span>
+            </div>
+        </div>
 
     </main>
 
@@ -1003,82 +375,65 @@
                 </div>
                 <p>Sickle Cell Awareness &amp; Support Foundation.<br>Empowering lives beyond the crisis through authentic stories, education, and inclusive advocacy.</p>
                 <div class="footer-socials">
-            <a href="https://facebook.com/Beyondthecrisis" target="_blank" aria-label="Facebook">
-                <svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path></svg>
-            </a>
-            <a href="https://x.com/beyondthcrisis" target="_blank" aria-label="X (Twitter)">
-                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
-            </a>
-            <a href="https://instagram.com/beyond_the_crisis" target="_blank" aria-label="Instagram">
-                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path></svg>
-            </a>
-            <a href="https://www.youtube.com/@beyond_the_crisis" target="_blank" aria-label="YouTube">
-                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
-            </a>
-            <a href="https://tiktok.com/@beyond_the_crisis" target="_blank" aria-label="TikTok">
-                <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.04.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 2.26-1.17 4.54-3.04 5.92-1.9 1.4-4.52 1.83-6.73 1.05-2.52-.89-4.27-3.41-4.21-6.14.05-2.61 1.79-5.11 4.26-5.87 1.25-.38 2.61-.39 3.88-.13v4.06c-1.39-.33-2.92-.09-3.99.9-1.28 1.2-1.29 3.42-.03 4.58 1.08 1 2.74 1.15 4.09.43 1.54-.83 2.13-2.67 2.1-4.32V.02h-2.69z"></path></svg>
-            </a>
-        </div>
+                    <a href="https://facebook.com/Beyondthecrisis" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path></svg></a>
+                    <a href="https://x.com/beyondthcrisis" target="_blank" aria-label="X (Twitter)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg></a>
+                    <a href="https://instagram.com/beyond_the_crisis" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path></svg></a>
+                    <a href="https://www.youtube.com/@beyond_the_crisis" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg></a>
+                    <a href="https://tiktok.com/@beyond_the_crisis" target="_blank" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.04.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 2.26-1.17 4.54-3.04 5.92-1.9 1.4-4.52 1.83-6.73 1.05-2.52-.89-4.27-3.41-4.21-6.14.05-2.61 1.79-5.11 4.26-5.87 1.25-.38 2.61-.39 3.88-.13v4.06c-1.39-.33-2.92-.09-3.99.9-1.28 1.2-1.29 3.42-.03 4.58 1.08 1 2.74 1.15 4.09.43 1.54-.83 2.13-2.67 2.1-4.32V.02h-2.69z"></path></svg></a>
+                </div>
             </div>
-
             <div class="footer-col">
                 <h4>Foundation</h4>
                 <ul>
-                    <li><a href="https://sicklecellawarenessfoundation.org/about">About us</a></li>
-                    <li><a href="https://sicklecellawarenessfoundation.org/stories">Our stories</a></li>
-                    <li><a href="https://sicklecellawarenessfoundation.org/about">Our team</a></li>
-                    <li><a href="#">Careers</a></li>
+                    <li><a href="/about">About us</a></li>
+                    <li><a href="/stories">Our stories</a></li>
+                    <li><a href="/team">Our team</a></li>
+                    <li><a href="/careers">Careers</a></li>
                 </ul>
             </div>
-
             <div class="footer-col">
                 <h4>Community</h4>
                 <ul>
-                    <li><a href="https://sicklecellawarenessfoundation.org/community">Community hub</a></li>
-                    <li><a href="#">Events &amp; workshops</a></li>
-                    <li><a href="https://sicklecellawarenessfoundation.org/advocacy">Advocacy work</a></li>
-                    <li><a href="#">Volunteer</a></li>
+                    <li><a href="/community">Community hub</a></li>
+                    <li><a href="/events">Events &amp; workshops</a></li>
+                    <li><a href="/advocacy">Advocacy work</a></li>
+                    <li><a href="/volunteer">Volunteer</a></li>
                 </ul>
             </div>
-
             <div class="footer-col">
                 <h4>Resources</h4>
                 <ul>
-                    <li><a href="https://sicklecellawarenessfoundation.org/learning">Learning center</a></li>
-                    <li><a href="https://sicklecellawarenessfoundation.org/stories">Articles &amp; news</a></li>
-                    <li><a href="https://sicklecellawarenessfoundation.org/faqs">FAQs</a></li>
-                    <li><a href="https://sicklecellawarenessfoundation.org/contact">Contact us</a></li>
+                    <li><a href="/learning">Learning center</a></li>
+                    <li><a href="/articles">Articles &amp; news</a></li>
+                    <li><a href="/faqs">FAQs</a></li>
+                    <li><a href="/contact">Contact us</a></li>
                 </ul>
             </div>
         </div>
-
         <div class="footer-bottom">
             <p>© 2026 Sickle Cell Awareness &amp; Support Foundation. All rights reserved.</p>
             <div class="footer-bottom-links">
-                <a href="#">Privacy policy</a>
-                <a href="#">Terms of service</a>
-                <a href="#">Cookie policy</a>
+                <a href="/privacy">Privacy policy</a>
+                <a href="/terms">Terms of service</a>
+                <a href="/cookies">Cookie policy</a>
             </div>
         </div>
     </footer>
 
+    <!-- SCRIPTS -->
     <script>
-        // LOGO REVEAL - Updated for direct link navigation
         const headerLogo = document.getElementById('header-logo');
         const logoButterfly = document.getElementById('logo-butterfly');
         let logoTimer;
         if (logoButterfly && headerLogo) {
             logoButterfly.addEventListener('click', (e) => {
-                // Ensure it reveals the text if clicked but still navigates as normal link behavior
                 e.stopPropagation();
                 headerLogo.classList.add('show-text');
                 clearTimeout(logoTimer);
-                logoTimer = setTimeout(() => headerLogo.classList.remove('show-text'), 3000);
+                logoTimer = setTimeout(() => { headerLogo.classList.remove('show-text'); }, 3000);
             });
         }
-
-        // MOBILE MENU
-        const hamburger  = document.getElementById('hamburger');
+        const hamburger = document.getElementById('hamburger');
         const navWrapper = document.getElementById('nav-wrapper');
         const allNavLinks = document.querySelectorAll('.nav-wrapper nav a, .nav-actions a');
         hamburger.addEventListener('click', () => {
@@ -1087,137 +442,24 @@
             hamburger.setAttribute('aria-expanded', isOpen);
             document.body.style.overflow = isOpen ? 'hidden' : '';
         });
-        allNavLinks.forEach(link => link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navWrapper.classList.remove('active');
-            hamburger.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
-        }));
-
-        // GLASS CARD SPOTLIGHT
-        const card = document.getElementById('interactive-card');
-        card.addEventListener('mousemove', e => {
-            const rect = card.getBoundingClientRect();
-            card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-            card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.setProperty('--mouse-x', '-999px');
-            card.style.setProperty('--mouse-y', '-999px');
-        });
-
-        // GLASS CARD CONTENT
-        const cardData = [
-            { title: "Our mission", text: "Sickle Cell Awareness & Support Foundation exists to amplify real stories, educate with honesty, and advocate for inclusive schools, workplaces, and communities where people living with sickle cell are supported with dignity and understanding." },
-            { title: "Our vision",  text: "To build a world where sickle cell no longer limits opportunity or silences voices — a future shaped by informed communities, inclusive systems, and individuals who are supported to thrive beyond diagnosis and crisis." }
-        ];
-        let currentIndex = 0;
-        let isAnimating  = false;
-        const btnPrev = document.getElementById('prev-card');
-        const btnNext = document.getElementById('next-card');
-        const contentWrapper = document.getElementById('card-content-wrapper');
-        const titleEl = document.getElementById('card-title');
-        const textEl  = document.getElementById('card-text');
-
-        function updateCard(index, direction) {
-            if (isAnimating) return;
-            isAnimating = true;
-            const outClass = direction === 'next' ? 'slide-out-left' : 'slide-out-right';
-            const inClass  = direction === 'next' ? 'slide-out-right' : 'slide-out-left';
-            contentWrapper.classList.add(outClass);
-            setTimeout(() => {
-                titleEl.textContent = cardData[index].title;
-                textEl.textContent  = cardData[index].text;
-                contentWrapper.classList.add('no-transition');
-                contentWrapper.classList.remove(outClass);
-                contentWrapper.classList.add(inClass);
-                void contentWrapper.offsetWidth;
-                contentWrapper.classList.remove('no-transition');
-                contentWrapper.classList.remove(inClass);
-                setTimeout(() => { isAnimating = false; }, 330);
-            }, 280);
-        }
-        btnNext.addEventListener('click', () => { if (!isAnimating) { currentIndex = (currentIndex + 1) % cardData.length; updateCard(currentIndex, 'next'); } });
-        btnPrev.addEventListener('click', () => { if (!isAnimating) { currentIndex = (currentIndex - 1 + cardData.length) % cardData.length; updateCard(currentIndex, 'prev'); } });
-
-        // COMMUNITY HEART
-        const communityAction = document.getElementById('community-driven-action');
-        const heartSvg = document.getElementById('heart-icon-svg');
-        if (communityAction && heartSvg) {
-            communityAction.addEventListener('click', () => {
-                communityAction.classList.toggle('liked');
-                heartSvg.classList.remove('jump-animation');
-                void heartSvg.offsetWidth;
-                heartSvg.classList.add('jump-animation');
-            });
-        }
-
-        // FAQ ACCORDION
-        document.querySelectorAll('.faq-item').forEach(item => {
-            item.querySelector('.faq-question').addEventListener('click', () => {
-                document.querySelectorAll('.faq-item').forEach(other => { if (other !== item) other.classList.remove('active'); });
-                item.classList.toggle('active');
+        allNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navWrapper.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
             });
         });
-
-        // NEWSLETTER FORMSPREE AJAX SUBMISSION
-        const form = document.getElementById("newsletter-form");
-        const submitBtn = document.getElementById("newsletter-btn");
-
-        if (form && submitBtn) {
-            form.addEventListener("submit", async function(event) {
-                event.preventDefault();
-                const originalText = submitBtn.innerHTML;
-                submitBtn.innerHTML = 'Subscribing...';
-                submitBtn.style.opacity = '0.8';
-                submitBtn.style.pointerEvents = 'none';
-
-                const data = new FormData(form);
-                
-                try {
-                    const response = await fetch(form.action, {
-                        method: form.method,
-                        body: data,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
-                    
-                    if (response.ok) {
-                        submitBtn.innerHTML = 'Subscribed ✓';
-                        submitBtn.style.background = 'rgba(255,255,255,0.1)';
-                        submitBtn.style.color = 'var(--lime)';
-                        submitBtn.style.border = '1px solid var(--lime)';
-                        submitBtn.style.opacity = '1';
-                        form.reset();
-                    } else {
-                        response.json().then(data => {
-                            submitBtn.style.pointerEvents = 'auto';
-                            submitBtn.style.opacity = '1';
-                            if (Object.hasOwn(data, 'errors')) {
-                                submitBtn.innerHTML = "Oops! Try again";
-                            } else {
-                                submitBtn.innerHTML = "Oops! Try again";
-                            }
-                            setTimeout(() => { submitBtn.innerHTML = originalText; }, 3000);
-                        })
-                    }
-                } catch (error) {
-                    submitBtn.style.pointerEvents = 'auto';
-                    submitBtn.style.opacity = '1';
-                    submitBtn.innerHTML = "Oops! Try again";
-                    setTimeout(() => { submitBtn.innerHTML = originalText; }, 3000);
-                }
-            });
-        }
-
-        // SCROLL REVEAL
+        const revealEls = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
