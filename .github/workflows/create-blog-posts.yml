@@ -1,0 +1,164 @@
+name: Create Blog Posts & Update Links
+
+on:
+  workflow_dispatch: 
+
+permissions:
+  contents: write 
+
+jobs:
+  generate-posts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create Python Script
+        run: |
+          cat << 'EOF' > create_blog_posts.py
+          import os
+          import re
+
+          # --- 1. BLOG POST CONTENT ---
+          post1_title = "Beyond the crisis: The backstory"
+          post1_date = "6 January 2026 at 17:31"
+          post1_body = """
+          <p>I’ve lived with sickle cell all my life.</p>
+          <p>For years, though, it wasn’t something I spoke about openly. Not because it wasn’t part of me, but because I was afraid; afraid of being treated differently, afraid of assumptions, afraid of pity, and afraid of how unkind people can be, even when they don’t mean to be.</p>
+          <p>So I hid it.</p>
+          <p>I carried it quietly while I went to school, built a career, made friends, travelled, and lived my life. I didn’t think my diagnosis needed to lead every conversation or define how people saw me. And for a long time, staying silent felt safer than explaining.</p>
+          <p>But silence comes at a cost.</p>
+          <p>Over time, I realised that by not speaking up, I was also leaving space for misinformation to grow, for outdated beliefs, stigma, and fear to keep shaping the narrative around sickle cell. I was watching conversations happen without context, without compassion, and without the voices of people who actually live this reality.</p>
+          <p>And something shifted.</p>
+          <p>I decided that if I was going to speak up, I wanted to do more than just tell my story. I wanted to create a space; a space where honesty is welcomed, where questions can be asked without shame, and where people living with sickle cell don’t feel pressured to hide or explain themselves.</p>
+          <p>That’s how Beyond the Crisis was born.</p>
+          <p>This space isn’t about pretending that living with sickle cell is easy. It’s not. There are days that require rest, patience, and care. There are moments when listening to my body matters more than pushing through. But there is also joy. Growth. Ambition. Purpose.</p>
+          <p>I’ve learned that living fully doesn’t mean ignoring your reality, it means working with it. It means setting goals with intention, finding rhythms that support your health, and giving yourself permission to dream without guilt.</p>
+          <p>I work full time. I travel. I write. I enjoy my hobbies. I build meaningful relationships. And I continue to set goals for myself, not in spite of my diagnosis, but alongside it.</p>
+          <p>Beyond the Crisis exists to remind others of this truth:<br><strong>a diagnosis does not cancel your dreams.</strong></p>
+          <p>This platform, is an invitation; to learn, to unlearn, to speak up if and when you’re ready, and to know that you are not alone in this journey.</p>
+          <p>Whether you’re living with sickle cell, supporting someone who is, or simply here to understand better, I hope this space offers clarity, comfort, and hope.</p>
+          """
+
+          post2_title = "Why No Two People Living With Sickle Cell Have the Same Experience"
+          post2_date = "10 January 2026 at 19:45"
+          post2_body = """
+          <p>I can never get tired of saying is this:</p>
+          <p><strong>"no two people living with sickle cell have the same experience."</strong></p>
+          <p>It’s one of the biggest misunderstandings I see and one of the most important conversations we need to have.</p>
+          <p>So often, sickle cell is spoken about as if it’s a single story, a fixed outcome, or a one-size-fits-all experience. But that couldn’t be further from the truth. Living with sickle cell is deeply individual, shaped by a combination of factors that interact differently for each person.</p>
+          <p>First off, not everyone even has the same genetic type of sickle cell. Some people live with HbSS, others with HbSC, HbS beta thalassemia, and other variations. These differences alone can influence how often someone experiences pain, fatigue, or other complications.</p>
+          <p>But genetics are only part of the picture.</p>
+          <p>There are so many other things quietly shaping a person’s experience; things like access to healthcare, early diagnosis, medication, environment, stress levels, mental and emotional wellbeing, nutrition, hydration, and even climate. Over time, age and life stage also play a role. What sickle cell looks like in childhood can be very different from what it looks like in adulthood.</p>
+          <p>And then there’s life itself.</p>
+          <p>Support systems. Work demands. School environments. How often someone is believed when they say they’re in pain. Whether they feel safe enough to ask for help. All of these things matter deeply. This is why comparison can be so harmful. Just because one person experiences sickle cell a certain way doesn’t mean another will, even if their diagnosis sounds similar on paper. Also, just because someone appears “fine” on the outside doesn’t mean they’re not managing a lot behind the scenes. That’s also why support needs to look different for different people.</p>
+          <p>The most helpful thing we can do, whether as friends, family members, employers, teachers, or allies is to ask rather than assume. To listen rather than project. To support the person in front of us, not the version of sickle cell we think we understand based on past knowledge or someone else’s story.</p>
+          <p>Living with sickle cell is not a template.<br>It’s a lived, evolving experience.</p>
+          """
+
+          # --- 2. HTML TEMPLATE BUILDER ---
+          def create_page_html(title, date, body, header_html, footer_html):
+              article_wrapper = f"""
+              <section class="ui-section bg-alt" style="padding-top: 160px; min-height: 80vh;">
+                  <div style="max-width: 800px; margin: 0 auto; background: var(--bg-white); padding: 50px 8%; border-radius: var(--r-xl); box-shadow: var(--shadow-card);">
+                      <div class="ui-tag">Article</div>
+                      <h1 style="font-size: clamp(2rem, 4vw, 2.8rem); font-variation-settings: 'wght' 650; margin-bottom: 12px; line-height: 1.15; color: var(--text-dark);">{title}</h1>
+                      <p style="color: var(--text-muted); font-size: 0.95rem; font-variation-settings: 'wght' 500; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--bg-border);">Published on {date}</p>
+                      
+                      <div class="article-body" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-mid); display: flex; flex-direction: column; gap: 20px;">
+                          {body}
+                      </div>
+                      
+                      <div style="margin-top: 50px; padding-top: 30px; border-top: 1px solid var(--bg-border);">
+                          <a href="https://sicklecellawarenessfoundation.org/stories" class="btn-primary" style="display: inline-flex;"><span class="arrow">←</span> Back to stories</a>
+                      </div>
+                  </div>
+              </section>
+              """
+              return f"{header_html}\n<main class='page-content' style='background: var(--bg-page);'>\n{article_wrapper}\n</main>\n{footer_html}"
+
+          # --- 3. EXTRACT HEADER & FOOTER FROM HOMEPAGE ---
+          if os.path.exists("index.html"):
+              with open("index.html", "r", encoding="utf-8") as f:
+                  index_content = f.read()
+
+              # Extract everything from DOCTYPE to the closing </header>
+              header_match = re.search(r'(<!DOCTYPE html>.*?</header>)', index_content, re.DOTALL)
+              # Extract everything from the NEWSLETTER section down to the closing </html>
+              footer_match = re.search(r'(<!-- NEWSLETTER -->.*</html>)', index_content, re.DOTALL)
+
+              if header_match and footer_match:
+                  header_html = header_match.group(1)
+                  # Give the header a solid background so it shows up against the white page
+                  header_html = header_html.replace('<header>', '<header style="background: var(--text-dark); position: fixed;">')
+                  footer_html = footer_match.group(1)
+
+                  # Generate the files
+                  with open("backstory.html", "w", encoding="utf-8") as f:
+                      f.write(create_page_html(post1_title, post1_date, post1_body, header_html, footer_html))
+                  print("Created backstory.html")
+
+                  with open("unique-experience.html", "w", encoding="utf-8") as f:
+                      f.write(create_page_html(post2_title, post2_date, post2_body, header_html, footer_html))
+                  print("Created unique-experience.html")
+
+              # --- 4. INJECT "LATEST STORIES" INTO HOMEPAGE ---
+              latest_stories_html = """
+              <!-- LATEST STORIES SECTION -->
+              <section class="ui-section bg-alt">
+                  <div class="section-header reveal">
+                      <div class="header-text">
+                          <div class="ui-tag">From the blog</div>
+                          <h2>Latest stories</h2>
+                      </div>
+                      <p class="header-desc">
+                          Read our newest articles, personal experiences, and insights on navigating life beyond the crisis.
+                      </p>
+                  </div>
+                  <div class="card-grid story-grid">
+                      <div class="ui-card reveal">
+                          <div class="card-content">
+                              <h3 class="card-title">Beyond the crisis: The backstory</h3>
+                              <p class="card-desc">I’ve lived with sickle cell all my life. For years, though, it wasn’t something I spoke about openly...</p>
+                              <div class="card-divider"></div>
+                              <button class="card-btn" onclick="window.location.href='backstory.html'">Read Article</button>
+                          </div>
+                      </div>
+                      <div class="ui-card reveal" style="transition-delay: 0.1s;">
+                          <div class="card-content">
+                              <h3 class="card-title">Why No Two People Living With Sickle Cell Have the Same Experience</h3>
+                              <p class="card-desc">Living with sickle cell is deeply individual, shaped by a combination of factors that interact differently for each person...</p>
+                              <div class="card-divider"></div>
+                              <button class="card-btn" onclick="window.location.href='unique-experience.html'">Read Article</button>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+              """
+
+              # Insert it right before the FAQ section if it's not already there
+              if "From the blog" not in index_content and "<!-- FAQ SECTION -->" in index_content:
+                  updated_index = index_content.replace("<!-- FAQ SECTION -->", latest_stories_html + "\n\n        <!-- FAQ SECTION -->")
+                  with open("index.html", "w", encoding="utf-8") as f:
+                      f.write(updated_index)
+                  print("Updated index.html with Latest Stories section")
+          else:
+              print("Could not find index.html to use as a template.")
+          EOF
+          
+          python create_blog_posts.py
+          rm create_blog_posts.py
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "Auto-generate new blog post pages and homepage links"
+            git push
+            echo "Successfully created blog posts and updated homepage!"
+          else
+            echo "No changes needed."
+          fi
