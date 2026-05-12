@@ -1,0 +1,53 @@
+name: Add Home Button to Navbar
+
+# This allows you to trigger the script manually from the Actions tab
+on:
+  workflow_dispatch: 
+
+# Gives the script permission to save changes back to your repo
+permissions:
+  contents: write 
+
+jobs:
+  update-html-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Python Script
+        run: |
+          python -c '
+          import os
+
+          home_link_html = """\n                <a href="https://sicklecellawarenessfoundation.org/">Home</a>"""
+          
+          for root, dirs, files in os.walk("."):
+              for file in files:
+                  if file.endswith(".html"):
+                      filepath = os.path.join(root, file)
+                      with open(filepath, "r", encoding="utf-8") as f:
+                          content = f.read()
+                      
+                      # Check if <nav> exists and if Home is NOT already there
+                      if "<nav>" in content and ">Home</a>" not in content:
+                          new_content = content.replace("<nav>", f"<nav>{home_link_html}", 1)
+                          with open(filepath, "w", encoding="utf-8") as f:
+                              f.write(new_content)
+                          print(f"Updated {filepath}")
+          '
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          
+          # This checks if the Python script actually changed any files
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "Auto-add Home button to all navbars"
+            git push
+            echo "Successfully updated and saved your files!"
+          else
+            echo "No files needed updating (Home button already exists)."
+          fi
