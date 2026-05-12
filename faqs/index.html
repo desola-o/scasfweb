@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & Metadata -->
+    <title>FAQs | Sickle Cell Awareness & Support Foundation</title>
+    <meta name="description" content="Welcome to our frequently asked questions section. We address common queries about living with sickle cell, our mission, and engaging with our community.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="https://primary.jwwb.nl/public/t/e/b/temp-phgcdwbfzcsnurmrysqy/image-2-standard.jpg">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,75..125,100..1000&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           CSS VARIABLES & DESIGN SYSTEM
+        ============================================================ */
+        :root {
+            --lime:           #cbf35b;
+            --lime-hover:     #b9e344;
+            --lime-shadow:    rgba(203, 243, 91, 0.28);
+
+            --text-dark:      #0f172a; 
+            --text-mid:       #475569;
+            --text-muted:     #94a3b8; 
+            --text-light:     #ffffff;
+
+            --bg-white:       #ffffff;
+            --bg-page:        #f8fafc; 
+
+            --r-xl:           24px; 
+            --r-lg:           16px;
+            --r-md:           12px;
+            --r-pill:         999px;
+
+            --shadow-card:    0 10px 40px -10px rgba(0, 0, 0, 0.08);
+            --shadow-hover:   0 20px 50px -10px rgba(0, 0, 0, 0.12);
+
+            --ease:           cubic-bezier(0.25, 0.8, 0.25, 1);
+            --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+            --t-fast:         0.2s;
+            --t-base:         0.3s;
+            --t-slow:         0.5s;
+
+            --text-xs:        0.75rem;
+            --text-sm:        0.875rem;
+            --text-base:      1rem;
+            --text-lg:        1.125rem;
+            --text-xl:        1.25rem;
+        }
+
+        /* ============================================================
+           RESET & BASE
+        ============================================================ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+        body {
+            font-family: 'Roboto Flex', sans-serif;
+            font-variation-settings: 'opsz' 14, 'wdth' 100, 'wght' 400;
+            font-size: var(--text-base);
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-page);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        a { text-decoration: none; color: inherit; }
+        img { display: block; max-width: 100%; }
+        :focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; border-radius: 4px; }
+
+        /* ============================================================
+           ENTRANCE ANIMATIONS
+        ============================================================ */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .reveal {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ============================================================
+           HEADER / NAVBAR
+        ============================================================ */
+        header { position: absolute; top: 0; left: 0; width: 100%; padding: 28px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 100; color: var(--text-light); }
+        .logo { display: flex; align-items: center; font-variation-settings: 'opsz' 16, 'wdth' 100, 'wght' 650; font-size: 1.05rem; letter-spacing: 0.02em; z-index: 101; cursor: pointer; transition: transform var(--t-base) var(--ease-spring); text-decoration: none; color: inherit; }
+        .logo:hover { transform: scale(1.04); }
+        .logo img { height: 34px; width: 34px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(255,255,255,0.25); position: relative; z-index: 2; }
+        .logo .logo-text { opacity: 0; max-width: 0; overflow: hidden; transform: translateX(-10px); transition: all 0.4s var(--ease); display: inline-block; white-space: nowrap; }
+        .logo.show-text .logo-text, .logo:hover .logo-text { opacity: 1; max-width: 100px; transform: translateX(0); margin-left: 10px; }
+        
+        .nav-wrapper { display: flex; align-items: center; gap: 40px; }
+        nav { display: flex; gap: 28px; }
+        nav a { font-size: var(--text-sm); font-variation-settings: 'opsz' 12, 'wdth' 100, 'wght' 450; opacity: 0.75; transition: opacity var(--t-fast) var(--ease); position: relative; padding-bottom: 3px; }
+        nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background: var(--lime); border-radius: 2px; transition: width var(--t-base) var(--ease); }
+        nav a:hover, nav a.active { opacity: 1; }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        
+        .btn-login, .btn-primary { background: var(--lime); color: var(--text-dark); border-radius: var(--r-pill); font-size: var(--text-sm); font-variation-settings: 'opsz' 12, 'wdth' 100, 'wght' 550; display: inline-flex; align-items: center; white-space: nowrap; transition: all var(--t-base) var(--ease); }
+        .btn-login { padding: 10px 22px; gap: 8px; }
+        .btn-primary { padding: 13px 26px; gap: 10px; border: none; cursor: pointer; font-family: inherit; }
+        .btn-login:hover, .btn-primary:hover { background: var(--lime-hover); transform: translateY(-2px); box-shadow: 0 6px 18px var(--lime-shadow); }
+        .btn-login .dot { width: 6px; height: 6px; background: var(--text-dark); border-radius: 50%; }
+        .btn-primary .arrow { background: var(--text-dark); color: var(--lime); width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; transition: transform var(--t-base) var(--ease-spring); }
+        .btn-primary:hover .arrow { transform: translateX(4px); }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 4px; }
+        .hamburger span { width: 26px; height: 2px; background: var(--text-light); border-radius: 2px; transition: all var(--t-base) var(--ease); }
+        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* ============================================================
+           INTERNAL HERO SECTION
+        ============================================================ */
+        .hero { 
+            position: relative; 
+            min-height: 60svh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            padding: 140px 5% 100px; 
+            background: linear-gradient(160deg, rgba(10, 10, 10, 0.7) 0%, rgba(10, 10, 10, 0.85) 100%), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop') center / cover; 
+            color: var(--text-light); 
+            text-align: center;
+        }
+        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 150px; background: linear-gradient(to top, var(--bg-page), transparent); pointer-events: none; z-index: 1; }
+        
+        .hero-content { position: relative; z-index: 2; max-width: 900px; animation: fadeUp 0.9s var(--ease) both; }
+        
+        .hero-tag { font-size: var(--text-xs); font-variation-settings: 'wght' 520; letter-spacing: 0.07em; text-transform: uppercase; border: 1px solid rgba(255, 255, 255, 0.22); padding: 6px 14px 6px 12px; border-radius: var(--r-pill); display: inline-flex; align-items: center; gap: 9px; margin-bottom: 24px; background: rgba(255,255,255,0.05); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+        .pulse-dot { width: 6px; height: 6px; background: var(--lime); border-radius: 50%; animation: pulse-green 2.2s infinite; }
+        @keyframes pulse-green { 0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(203, 243, 91, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(203, 243, 91, 0); } 100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(203, 243, 91, 0); } }
+
+        .hero h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-variation-settings: 'wght' 480; line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 22px; }
+        .hero p { font-size: clamp(1.05rem, 1.5vw, 1.2rem); font-variation-settings: 'wght' 380; line-height: 1.65; opacity: 0.9; margin: 0 auto; max-width: 750px; }
+
+        /* ============================================================
+           MAIN CONTENT WRAPPER
+        ============================================================ */
+        .page-content { background-color: var(--bg-page); position: relative; z-index: 20; padding-bottom: 0; }
+
+        .ui-section { padding: 80px 5%; max-width: 1300px; margin: 0 auto; }
+        .ui-section.bg-alt { background-color: var(--bg-white); max-width: 100%; padding-left: 5%; padding-right: 5%; border-top: 1px solid rgba(0,0,0,0.03); border-bottom: 1px solid rgba(0,0,0,0.03); }
+        .ui-section.bg-alt > .inner-wrap { max-width: 1300px; margin: 0 auto; }
+        
+        .ui-tag { color: var(--text-dark); font-size: var(--text-xs); font-variation-settings: 'wght' 600; letter-spacing: 0.08em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+        .ui-tag::before { content: ''; width: 6px; height: 6px; background: var(--lime); border-radius: 50%; display: inline-block; flex-shrink: 0; }
+
+        /* Section Header */
+        .section-header { text-align: center; max-width: 800px; margin: 0 auto 60px; display: flex; flex-direction: column; align-items: center; }
+        .section-header.left-aligned { text-align: left; align-items: flex-start; margin-left: 0; margin-right: auto; max-width: 700px; }
+        .section-header h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); font-variation-settings: 'opsz' 48, 'wdth' 100, 'wght' 600; line-height: 1.1; letter-spacing: -0.03em; color: var(--text-dark); margin-bottom: 16px; }
+        .section-header p { font-size: clamp(1.1rem, 1.5vw, 1.2rem); color: var(--text-mid); line-height: 1.6; }
+
+        /* ============================================================
+           ACCORDION SYSTEM (FAQs & Myths)
+        ============================================================ */
+        .faq-wrapper { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+        
+        .faq-item { background: var(--bg-white); border-radius: var(--r-lg); box-shadow: var(--shadow-card); border: 1px solid rgba(0,0,0,0.03); overflow: hidden; transition: box-shadow var(--t-base) var(--ease), transform var(--t-base) var(--ease); }
+        .faq-item:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+        
+        .faq-header { width: 100%; text-align: left; padding: 28px 32px; background: none; border: none; font-family: inherit; font-size: 1.2rem; font-variation-settings: 'wght' 550; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; transition: color var(--t-fast); line-height: 1.4; }
+        .faq-header:hover { color: #658117; }
+        .faq-header:focus-visible { outline: 2px solid var(--lime); outline-offset: -4px; border-radius: var(--r-lg); }
+        
+        .faq-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--bg-page); flex-shrink: 0; position: relative; transition: background var(--t-base), transform var(--t-base) var(--ease-spring); }
+        .faq-item.active .faq-icon { background: var(--lime); transform: rotate(180deg); }
+        .faq-icon::before, .faq-icon::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--text-dark); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; }
+        .faq-icon::before { width: 12px; height: 2px; }
+        .faq-icon::after { width: 2px; height: 12px; }
+        .faq-item.active .faq-icon::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+        
+        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.5s var(--ease); }
+        .faq-content-inner { padding: 0 32px 32px; color: var(--text-mid); line-height: 1.7; font-size: 1.05rem; }
+
+        .myth-tag { display: inline-block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-variation-settings: 'wght' 700; color: #ef4444; background: #fee2e2; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; }
+        .fact-tag { display: inline-block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-variation-settings: 'wght' 700; color: #15803d; background: #dcfce7; padding: 4px 10px; border-radius: 4px; margin-bottom: 12px; display: block; width: fit-content; }
+
+        /* ============================================================
+           FEATURE GRID (Getting Started & Impact)
+        ============================================================ */
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+        
+        .feature-card { background: var(--bg-white); border-radius: var(--r-xl); padding: 40px 32px; box-shadow: var(--shadow-card); transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease); border: 1px solid rgba(0,0,0,0.03); position: relative; overflow: hidden; display: flex; flex-direction: column; height: 100%; }
+        .feature-card.bg-alt { background: var(--bg-page); box-shadow: none; border-color: rgba(0,0,0,0.05); }
+        .feature-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--lime); transform: scaleX(0); transform-origin: left; transition: transform var(--t-base) var(--ease); }
+        .feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+        .feature-card:hover::before { transform: scaleX(1); }
+
+        .feature-icon { width: 56px; height: 56px; border-radius: var(--r-lg); background: var(--bg-page); color: var(--text-dark); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; transition: transform var(--t-base) var(--ease-spring), background var(--t-fast); }
+        .feature-card.bg-alt .feature-icon { background: var(--bg-white); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .feature-card:hover .feature-icon { transform: scale(1.1) rotate(-4deg); background: var(--lime); }
+        .feature-icon svg { width: 28px; height: 28px; fill: currentColor; }
+
+        .feature-card h3 { font-size: 1.3rem; font-variation-settings: 'wght' 600; line-height: 1.3; letter-spacing: -0.01em; color: var(--text-dark); margin-bottom: 12px; }
+        .feature-card p { font-size: 1rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+        .feature-card .card-link { font-size: 0.9rem; font-variation-settings: 'wght' 600; color: var(--text-dark); display: inline-flex; align-items: center; gap: 6px; margin-top: auto; transition: color var(--t-fast); }
+        .feature-card .card-link:hover { color: #658117; }
+        .feature-card .card-link svg { width: 16px; height: 16px; transition: transform var(--t-base) var(--ease-spring); }
+        .feature-card .card-link:hover svg { transform: translateX(4px); }
+
+        .reminder-card { background: var(--text-dark); color: var(--text-light); border-radius: var(--r-xl); padding: 48px 5%; text-align: center; margin-top: 40px; }
+        .reminder-card h3 { font-size: 1.6rem; font-variation-settings: 'wght' 500; margin-bottom: 12px; color: var(--lime); }
+        .reminder-card p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+
+        /* ============================================================
+           CTA SECTION
+        ============================================================ */
+        .cta-section { padding: 100px 5%; margin: 0; background: linear-gradient(160deg, rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.9)), url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop') center / cover; position: relative; }
+        .cta-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2); border-radius: var(--r-xl); padding: 80px 5%; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; overflow: hidden; max-width: 1000px; margin: 0 auto; color: var(--text-light); }
+        .cta-card::before { content: ''; position: absolute; top: -50%; right: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%); pointer-events: none; }
+        
+        .cta-card h2 { font-size: clamp(2rem, 4vw, 3rem); font-variation-settings: 'opsz' 48, 'wdth' 100, 'wght' 600; line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.02em; }
+        .cta-card p { color: rgba(255,255,255,0.85); font-size: 1.1rem; line-height: 1.7; max-width: 750px; margin-bottom: 40px; }
+        
+        .outro-text { text-align: center; max-width: 700px; margin: 0 auto 60px; font-size: 1.1rem; color: var(--text-mid); font-style: italic; padding: 0 5%; }
+
+        /* ============================================================
+           SCROLLING REEL
+        ============================================================ */
+        .scrolling-reel { 
+            width: 100%; 
+            padding: 24px 0; 
+            background: #141414;
+            border-top: 1px solid rgba(255, 255, 255, 0.05); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden; 
+            display: flex; 
+            position: relative;
+            z-index: 20;
+        }
+        .scrolling-track { display: flex; white-space: nowrap; animation: scrollReel 40s linear infinite; }
+        .scrolling-reel:hover .scrolling-track { animation-play-state: paused; }
+        .scrolling-track span { display: inline-flex; align-items: center; color: rgba(255,255,255,0.6); font-size: 0.85rem; font-variation-settings: 'wght' 600; letter-spacing: 0.1em; text-transform: uppercase; }
+        .reel-dot { color: rgba(255,255,255,0.3); margin: 0 28px; font-size: 1.2rem; }
+        @keyframes scrollReel { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        .site-footer { background: linear-gradient(160deg, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0.98) 100%), url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop') center / cover; color: var(--text-light); padding: 80px 5% 30px; position: relative; z-index: 20; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; max-width: 1440px; margin: 0 auto 60px; }
+        .footer-brand-col { max-width: 360px; }
+        .footer-logo { display: flex; align-items: center; gap: 10px; font-variation-settings: 'opsz' 16, 'wdth' 100, 'wght' 650; font-size: 1.25rem; letter-spacing: 0.02em; color: var(--text-light); margin-bottom: 24px; }
+        .footer-logo img { height: 38px; width: 38px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(255,255,255,0.25); }
+        .footer-brand-col p { color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.6; margin-bottom: 28px; }
+        .footer-socials { display: flex; gap: 12px; }
+        .footer-socials a { width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid transparent; display: flex; align-items: center; justify-content: center; transition: all var(--t-fast) var(--ease); color: var(--text-light); }
+        .footer-socials a:hover { background: var(--lime); border-color: var(--lime); color: var(--text-dark); transform: translateY(-3px); box-shadow: 0 8px 24px var(--lime-shadow); }
+        .footer-socials svg { width: 18px; height: 18px; fill: currentColor; }
+        .footer-col h4 { font-size: 1.1rem; font-variation-settings: 'wght' 600; color: var(--text-light); margin-bottom: 24px; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+        .footer-col ul a { color: rgba(255,255,255,0.7); font-size: 0.95rem; transition: all var(--t-fast) var(--ease); }
+        .footer-col ul a:hover { color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; max-width: 1440px; margin: 0 auto; flex-wrap: wrap; gap: 20px; }
+        .footer-bottom p { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+        .footer-bottom-links { display: flex; gap: 24px; }
+        .footer-bottom-links a { color: rgba(255,255,255,0.5); font-size: 0.85rem; transition: color var(--t-fast); }
+        .footer-bottom-links a:hover { color: var(--text-light); text-shadow: 0 0 8px rgba(255, 255, 255, 0.3); }
+
+        /* ============================================================
+           RESPONSIVE DESIGN
+        ============================================================ */
+        @media (max-width: 1150px) {
+            .hamburger { display: flex; }
+            .nav-wrapper { position: fixed; top: 0; right: -100%; width: 100%; height: 100dvh; background: rgba(30, 30, 30, 0.45); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); flex-direction: column; justify-content: center; align-items: center; transition: right var(--t-base) var(--ease); gap: 28px; z-index: 100; }
+            .nav-wrapper.active { right: 0; }
+            nav { flex-direction: column; align-items: center; gap: 20px; }
+            nav a { font-size: 1.15rem; opacity: 0.7; }
+        }
+
+        @media (max-width: 992px) {
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 22px 5%; }
+            .hero { padding: 120px 5% 80px; }
+            .ui-section { padding: 60px 5%; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .cta-card { padding: 50px 5%; }
+            .faq-header { font-size: 1.1rem; padding: 20px 24px; }
+            .faq-content-inner { padding: 0 24px 24px; }
+            
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2.2rem; }
+            .section-header h2 { font-size: 1.8rem; }
+            .cta-card h2 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / NAVBAR -->
+    <header>
+        <div class="logo" id="header-logo">
+            <a href="/">
+                <img src="https://primary.jwwb.nl/public/t/e/b/temp-phgcdwbfzcsnurmrysqy/image-2-standard.jpg" alt="SCASF Logo" id="logo-butterfly">
+            </a>
+            <a href="/" class="logo-text">SCASF</a>
+        </div>
+        <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="nav-wrapper" id="nav-wrapper">
+            <nav>
+                <a href="/about">About us</a>
+                <a href="/stories">Our stories</a>
+                <a href="/advocacy">Advocacy</a>
+                <a href="/community">Community hub</a>
+                <a href="/learning">Learning</a>
+                <a href="/faqs" class="active">FAQs</a>
+                <a href="/contact">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="https://chat.whatsapp.com/B9sLilTEEoEGB42D48Owia" target="_blank" class="btn-login">
+                    <span class="dot"></span> Join our community
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">
+                <span class="pulse-dot"></span>
+                Knowledge & Clarity
+            </span>
+            <h1>Your questions answered</h1>
+            <p>Welcome to our frequently asked questions section. Here, we address common queries about living with sickle cell, our mission, and how you can engage with our community. We aim to provide clear, empathetic, and informative answers to empower you with knowledge and understanding.</p>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="page-content">
+
+        <!-- FAQs SECTION -->
+        <section class="ui-section" style="padding-top: 80px; padding-bottom: 60px;">
+            <div class="section-header reveal">
+                <div class="ui-tag">General Queries</div>
+                <h2>Frequently asked questions</h2>
+                <p>There are many misunderstandings about sickle cell, and most of them come from lack of information rather than bad intentions. One of the core aims of Beyond the Crisis is to help replace these myths with understanding, empathy, and truth.</p>
+            </div>
+
+            <!-- Accordion Wrapper -->
+            <div class="faq-wrapper reveal">
+                
+                <div class="faq-item">
+                    <button class="faq-header" aria-expanded="false">
+                        “Does having sickle cell mean you can’t live a normal or full life?”
+                        <div class="faq-icon"></div>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            <p>While sickle cell is a serious, lifelong condition, it affects people differently. Many people living with sickle cell work, study, travel, build families, and enjoy meaningful lives. Living well often means being intentional managing health, listening to your body, and having supportive environments at school, work, and in the community. Adjustments may be needed, but they are not limitations. Sickle cell is not a death sentence, and it does not define a person’s worth or potential.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-header" aria-expanded="false">
+                        “Why are you speaking about sickle cell now, and why did you keep it private for so long?”
+                        <div class="faq-icon"></div>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            <p>For a long time, I kept this part of my life private out of fear; fear of being treated differently, misunderstood, or pitied, even when people meant well. I didn’t feel it was something I had to explain or lead with. Over time, I realised that silence also allows misinformation and stigma to continue. I’m speaking now because I’m ready to shift the conversation toward understanding, support, and advocacy and to show that there is more to life than a diagnosis. This isn’t about seeking sympathy. It’s about honesty, education, and creating safer spaces for others to live openly and fully beyond the crisis.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-header" aria-expanded="false">
+                        “Is sickle cell the same for everyone?”
+                        <div class="faq-icon"></div>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            <p>People experience sickle cell very differently. Factors such as genotype, access to healthcare, environment, stress, mental wellbeing, and life stage all play a role. Even two people with the same genotype can have very different experiences. This is why comparison can be harmful and why empathy matters. Understanding that sickle cell looks different from person to person helps create more supportive and inclusive spaces.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-header" aria-expanded="false">
+                        “What exactly is Beyond the Crisis, and who is it for?”
+                        <div class="faq-icon"></div>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            <p>Beyond the Crisis is a storytelling, education, and advocacy platform centered on real life with sickle cell beyond myths, stigma, and moments of crisis. It exists to share lived experiences, provide clear and compassionate learning, and advocate for more inclusive schools, workplaces, and communities. Beyond the Crisis is for people living with sickle cell, families and caregivers, educators, employers, and anyone who wants to understand better and offer support with empathy and respect.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-header" aria-expanded="false">
+                        “How can people support someone living with sickle cell without pity or overstepping?”
+                        <div class="faq-icon"></div>
+                    </button>
+                    <div class="faq-content">
+                        <div class="faq-content-inner">
+                            <p>The most helpful support starts with listening and respecting individual needs. People living with sickle cell don’t need pity or assumptions. They need understanding, flexibility, and trust. Everyone’s experience is different, so it’s important to ask what support looks like for that person rather than deciding for them. Practical support can include being patient during flare-ups, respecting boundaries, supporting reasonable adjustments at school or work, and challenging misinformation when you hear it. Most importantly, treat people as whole individuals not defined by their condition. Support is about standing with someone, not speaking for them.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- MYTH VS FACT SECTION -->
+        <section class="ui-section bg-alt" style="padding-top: 80px; padding-bottom: 80px;">
+            <div class="inner-wrap">
+                <div class="section-header reveal">
+                    <div class="ui-tag">Unlearning Stereotypes</div>
+                    <h2>Myth vs. Fact: Unpacking misconceptions</h2>
+                    <p>It's time to challenge the common narratives. Click each myth below to reveal the fact and help replace fear with knowledge.</p>
+                </div>
+
+                <!-- Myth Accordions -->
+                <div class="faq-wrapper reveal">
+                    
+                    <div class="faq-item">
+                        <button class="faq-header" aria-expanded="false">
+                            <div><span class="myth-tag">Myth</span> “People with sickle cell are always sick or fragile.”</div>
+                            <div class="faq-icon"></div>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-content-inner">
+                                <span class="fact-tag">Fact</span>
+                                <p>This is one of the biggest misconceptions. While sickle cell is a serious, lifelong condition, many people live full, active lives; working, studying, travelling, building families, and pursuing their goals. Experiences vary widely, and being cautious does not mean being weak.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-header" aria-expanded="false">
+                            <div><span class="myth-tag">Myth</span> “Sickle cell looks the same for everyone.”</div>
+                            <div class="faq-icon"></div>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-content-inner">
+                                <span class="fact-tag">Fact</span>
+                                <p>Sickle cell affects people differently. Genotype, access to care, environment, stress, mental health, and life stage all play a role. Two people with the same diagnosis can have very different experiences, which is why comparison can be harmful.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-header" aria-expanded="false">
+                            <div><span class="myth-tag">Myth</span> “People with sickle cell won’t live long.”</div>
+                            <div class="faq-icon"></div>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-content-inner">
+                                <span class="fact-tag">Fact</span>
+                                <p>This belief is outdated and harmful. Advances in care, better awareness, and improved support systems have changed outcomes significantly. Many people with sickle cell now live well into adulthood and older age. Life expectancy is not a fixed sentence.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-header" aria-expanded="false">
+                            <div><span class="myth-tag">Myth</span> “People with sickle cell shouldn’t work, study, or push themselves.”</div>
+                            <div class="faq-icon"></div>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-content-inner">
+                                <span class="fact-tag">Fact</span>
+                                <p>This myth often leads to exclusion rather than support. What people with sickle cell need is flexibility, understanding, and reasonable adjustments, not lowered expectations or assumptions about what they can or cannot do.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-header" aria-expanded="false">
+                            <div><span class="myth-tag">Myth</span> “Talking about sickle cell brings pity or means asking for sympathy.”</div>
+                            <div class="faq-icon"></div>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-content-inner">
+                                <span class="fact-tag">Fact</span>
+                                <p>Speaking about sickle cell is not about pity. It’s about honesty, education, and advocacy. Silence often increases stigma, while open, respectful conversations help create safer schools, workplaces, and communities.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- GETTING STARTED SECTION -->
+        <section class="ui-section" style="padding-top: 80px; padding-bottom: 80px;">
+            <div class="section-header reveal">
+                <div class="ui-tag">Take Action</div>
+                <h2>Getting started: learn, connect, support</h2>
+                <p>The best place to start is at your own pace. Everyone comes to Beyond the Crisis from a different place. There’s no “right” way to begin. Here are a few simple ways to start, depending on what you’re looking for:</p>
+            </div>
+
+            <div class="feature-grid reveal">
+                <!-- Learn -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 3L1 9L5 11.18V17.18L12 21L19 17.18V11.18L21 10.09V17H23V9L12 3ZM18.82 9L12 12.72L5.18 9L12 5.28L18.82 9ZM17 15.99L12 18.72L7 15.99V12.27L12 15L17 12.27V15.99Z"/></svg>
+                    </div>
+                    <h3>To learn and understand</h3>
+                    <p>Visit the Resources & Learning page for clear, trusted information about sickle cell, genotype, daily living, and advocacy. This is a quiet, pressure-free space to read, reflect, and return to when needed.</p>
+                    <a href="/learning" class="card-link">Explore resources <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
+                </div>
+
+                <!-- Connect -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    </div>
+                    <h3>To connect with others</h3>
+                    <p>You’re welcome to join the SCASF Community a private, moderated space for shared stories, learning, and support. You can participate actively or simply listen and learn. Both are valid.</p>
+                    <a href="https://chat.whatsapp.com/B9sLilTEEoEGB42D48Owia" target="_blank" class="card-link">Join the community <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
+                </div>
+
+                <!-- Share -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                    </div>
+                    <h3>To share your story</h3>
+                    <p>If you feel ready, you can share your experience. You may choose to remain anonymous and decide how your story is used. Sharing is always optional and handled with care.</p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSciL6qISZY2Zyud3WZwa3eXb660QOYTDzKTo9aEYdX7SJyPbQ/viewform?usp=publish-editor" target="_blank" class="card-link">Submit your story <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
+                </div>
+
+                <!-- Stay updated -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+                    </div>
+                    <h3>To stay updated</h3>
+                    <p>Follow Beyond_the_Crisis on social media for ongoing conversations, education, advocacy updates, and gentle reminders that life with sickle cell can be lived fully.</p>
+                    <a href="#" class="card-link">Follow our socials <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
+                </div>
+            </div>
+
+            <div class="reminder-card reveal">
+                <h3>A gentle reminder</h3>
+                <p>You don’t have to do everything at once. You don’t have to explain yourself. And you don’t have to be ready to speak to belong here. Whether you start by reading, listening, sharing, or simply staying connected, you’re welcome.</p>
+            </div>
+        </section>
+
+        <!-- IMPACT SECTION -->
+        <section class="ui-section bg-alt" style="padding-top: 80px; padding-bottom: 80px;">
+            <div class="inner-wrap">
+                <div class="section-header reveal">
+                    <div class="ui-tag">Our Impact</div>
+                    <h2>How beyond the crisis makes a difference</h2>
+                    <p>SCASF makes a difference by turning lived experiences into understanding, and understanding into action. Rather than focusing only on illness or crisis moments, we center everyday life. Here’s how that impact shows up:</p>
+                </div>
+
+                <div class="feature-grid reveal">
+                    <div class="feature-card bg-alt">
+                        <h3>In schools</h3>
+                        <p>SCASF helps shift schools from misunderstanding to inclusion by educating teachers on what sickle cell actually looks like in daily life, highlighting the importance of reasonable adjustments without stigma, and encouraging early, compassionate conversations. This creates learning environments where students are supported, not singled out.</p>
+                    </div>
+
+                    <div class="feature-card bg-alt" style="transition-delay: 0.1s;">
+                        <h3>In workplaces</h3>
+                        <p>We advocate for healthier work cultures by normalising conversations around chronic illness, providing tools for employees to speak up safely, and helping employers understand that flexibility improves productivity. The goal is fair access, dignity, and the ability to do meaningful work without unnecessary harm.</p>
+                    </div>
+
+                    <div class="feature-card bg-alt" style="transition-delay: 0.2s;">
+                        <h3>In the wider community</h3>
+                        <p>SCASF works to break myths through honest storytelling, reduce stigma rooted in fear or outdated beliefs, and encourage empathy instead of pity. By sharing real experiences, we help communities move away from silence and judgement toward understanding and active support.</p>
+                    </div>
+
+                    <div class="feature-card bg-alt" style="transition-delay: 0.3s;">
+                        <h3>At its core</h3>
+                        <p>SCASF makes invisible experiences visible, replaces fear with knowledge, and builds bridges between individuals and systems. The real difference is felt when someone feels confident asking for support, is treated with respect instead of assumptions, and realises life can still be full, purposeful, and hopeful.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <p class="outro-text reveal" style="margin-top: 40px;">If your question isn’t listed here, you’re welcome to explore the Resources page, join the community, or reach out. Curiosity, when paired with respect, is always welcome.</p>
+
+        <!-- CTA SECTION -->
+        <section class="cta-section reveal">
+            <div class="cta-card">
+                <h2>Ready to move beyond the crisis?</h2>
+                <p>We're here to provide clarity, community, and courage. Explore our resources, connect with others, and discover how we're making a tangible difference in the lives of those impacted by sickle cell. Your journey towards understanding and empowerment starts here.</p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+                    <a href="/learning" class="btn-primary" style="padding: 16px 32px; font-size: 1.05rem;">
+                        Explore Resources <span class="arrow">→</span>
+                    </a>
+                    <a href="https://chat.whatsapp.com/B9sLilTEEoEGB42D48Owia" target="_blank" class="btn-primary" style="padding: 16px 32px; font-size: 1.05rem; background: var(--bg-white); color: var(--text-dark);">
+                        Join the Community
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCROLLING REEL -->
+        <div class="scrolling-reel">
+            <div class="scrolling-track">
+                <span>
+                    SHARING AUTHENTIC STORIES <span class="reel-dot">•</span>
+                    PROVIDING COMMUNITY SUPPORT <span class="reel-dot">•</span>
+                    EDUCATING SCHOOLS &amp; INSTITUTIONS <span class="reel-dot">•</span>
+                    FOSTERING DIGNITY &amp; UNDERSTANDING <span class="reel-dot">•</span>
+                    ADVOCATING FOR INCLUSIVE WORKPLACES <span class="reel-dot">•</span>
+                </span>
+                <span>
+                    SHARING AUTHENTIC STORIES <span class="reel-dot">•</span>
+                    PROVIDING COMMUNITY SUPPORT <span class="reel-dot">•</span>
+                    EDUCATING SCHOOLS &amp; INSTITUTIONS <span class="reel-dot">•</span>
+                    FOSTERING DIGNITY &amp; UNDERSTANDING <span class="reel-dot">•</span>
+                    ADVOCATING FOR INCLUSIVE WORKPLACES <span class="reel-dot">•</span>
+                </span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MODERN FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <!-- Column 1: Brand -->
+            <div class="footer-brand-col">
+                <div class="footer-logo">
+                    <img src="https://primary.jwwb.nl/public/t/e/b/temp-phgcdwbfzcsnurmrysqy/image-2-standard.jpg" alt="SCASF Logo">
+                    SCASF
+                </div>
+                <p>Sickle Cell Awareness &amp; Support Foundation.<br>Empowering lives beyond the crisis through authentic stories, education, and inclusive advocacy.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path></svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="footer-col">
+                <h4>Foundation</h4>
+                <ul>
+                    <li><a href="/about">About us</a></li>
+                    <li><a href="/stories">Our stories</a></li>
+                    <li><a href="/team">Our team</a></li>
+                    <li><a href="/careers">Careers</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="footer-col">
+                <h4>Community</h4>
+                <ul>
+                    <li><a href="/community">Community hub</a></li>
+                    <li><a href="/events">Events &amp; workshops</a></li>
+                    <li><a href="/advocacy">Advocacy work</a></li>
+                    <li><a href="/volunteer">Volunteer</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4 -->
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/learning">Learning center</a></li>
+                    <li><a href="/articles">Articles &amp; news</a></li>
+                    <li><a href="/faqs">FAQs</a></li>
+                    <li><a href="/contact">Contact us</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Sickle Cell Awareness &amp; Support Foundation. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="/privacy">Privacy policy</a>
+                <a href="/terms">Terms of service</a>
+                <a href="/cookies">Cookie policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // --- LOGO REVEAL LOGIC ---
+        const headerLogo = document.getElementById('header-logo');
+        const logoButterfly = document.getElementById('logo-butterfly');
+        let logoTimer;
+
+        if (logoButterfly && headerLogo) {
+            logoButterfly.addEventListener('click', (e) => {
+                e.stopPropagation();
+                headerLogo.classList.add('show-text');
+                clearTimeout(logoTimer);
+                logoTimer = setTimeout(() => {
+                    headerLogo.classList.remove('show-text');
+                }, 3000);
+            });
+        }
+
+        // --- MOBILE MENU ---
+        const hamburger   = document.getElementById('hamburger');
+        const navWrapper  = document.getElementById('nav-wrapper');
+        const allNavLinks = document.querySelectorAll('.nav-wrapper nav a, .nav-actions a');
+
+        hamburger.addEventListener('click', () => {
+            const isOpen = navWrapper.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+
+        allNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navWrapper.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // --- ACCORDION LOGIC ---
+        const faqs = document.querySelectorAll('.faq-item');
+        faqs.forEach(faq => {
+            const header = faq.querySelector('.faq-header');
+            const content = faq.querySelector('.faq-content');
+            
+            header.addEventListener('click', () => {
+                const isActive = faq.classList.contains('active');
+                
+                // Close all others
+                faqs.forEach(item => {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-header').setAttribute('aria-expanded', 'false');
+                    item.querySelector('.faq-content').style.maxHeight = null;
+                });
+                
+                // Open clicked if it wasn't already active
+                if (!isActive) {
+                    faq.classList.add('active');
+                    header.setAttribute('aria-expanded', 'true');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+
+        // Handle resize for open accordions to prevent cut-off text
+        window.addEventListener('resize', () => {
+            document.querySelectorAll('.faq-item.active .faq-content').forEach(content => {
+                content.style.maxHeight = content.scrollHeight + "px";
+            });
+        });
+
+        // --- SCROLL REVEAL ---
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer  = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        revealEls.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
