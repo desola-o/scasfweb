@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & Metadata -->
+    <title>Contact Us | Sickle Cell Awareness & Support Foundation</title>
+    <meta name="description" content="Connect with us to book a talk, share your story, ask a question, or explore partnership opportunities. We're here to listen and help.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="https://primary.jwwb.nl/public/t/e/b/temp-phgcdwbfzcsnurmrysqy/image-2-standard.jpg">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,75..125,100..1000&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           CSS VARIABLES & DESIGN SYSTEM
+        ============================================================ */
+        :root {
+            --lime:           #cbf35b;
+            --lime-hover:     #b9e344;
+            --lime-shadow:    rgba(203, 243, 91, 0.28);
+
+            --text-dark:      #0f172a; 
+            --text-mid:       #475569;
+            --text-muted:     #94a3b8; 
+            --text-light:     #ffffff;
+
+            --bg-white:       #ffffff;
+            --bg-page:        #f8fafc; 
+
+            --r-xl:           24px; 
+            --r-lg:           16px;
+            --r-md:           12px;
+            --r-pill:         999px;
+
+            --shadow-card:    0 10px 40px -10px rgba(0, 0, 0, 0.08);
+            --shadow-hover:   0 20px 50px -10px rgba(0, 0, 0, 0.12);
+
+            --ease:           cubic-bezier(0.25, 0.8, 0.25, 1);
+            --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+            --t-fast:         0.2s;
+            --t-base:         0.3s;
+            --t-slow:         0.5s;
+
+            --text-xs:        0.75rem;
+            --text-sm:        0.875rem;
+            --text-base:      1rem;
+            --text-lg:        1.125rem;
+            --text-xl:        1.25rem;
+        }
+
+        /* ============================================================
+           RESET & BASE
+        ============================================================ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+        body {
+            font-family: 'Roboto Flex', sans-serif;
+            font-variation-settings: 'opsz' 14, 'wdth' 100, 'wght' 400;
+            font-size: var(--text-base);
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-page);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        a { text-decoration: none; color: inherit; }
+        img { display: block; max-width: 100%; }
+        
+        /* Custom Focus Ring */
+        :focus-visible { outline: none; border-color: var(--lime); box-shadow: 0 0 0 4px var(--lime-shadow); border-radius: 4px; }
+
+        /* ============================================================
+           ENTRANCE ANIMATIONS
+        ============================================================ */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .reveal {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ============================================================
+           HEADER / NAVBAR
+        ============================================================ */
+        header { position: absolute; top: 0; left: 0; width: 100%; padding: 28px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 100; color: var(--text-light); }
+        .logo { display: flex; align-items: center; font-variation-settings: 'opsz' 16, 'wdth' 100, 'wght' 650; font-size: 1.05rem; letter-spacing: 0.02em; z-index: 101; cursor: pointer; transition: transform var(--t-base) var(--ease-spring); text-decoration: none; color: inherit; }
+        .logo:hover { transform: scale(1.04); }
+        .logo img { height: 34px; width: 34px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(255,255,255,0.25); position: relative; z-index: 2; }
+        .logo .logo-text { opacity: 0; max-width: 0; overflow: hidden; transform: translateX(-10px); transition: all 0.4s var(--ease); display: inline-block; white-space: nowrap; }
+        .logo.show-text .logo-text, .logo:hover .logo-text { opacity: 1; max-width: 100px; transform: translateX(0); margin-left: 10px; }
+        
+        .nav-wrapper { display: flex; align-items: center; gap: 40px; }
+        nav { display: flex; gap: 28px; }
+        nav a { font-size: var(--text-sm); font-variation-settings: 'opsz' 12, 'wdth' 100, 'wght' 450; opacity: 0.75; transition: opacity var(--t-fast) var(--ease); position: relative; padding-bottom: 3px; }
+        nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background: var(--lime); border-radius: 2px; transition: width var(--t-base) var(--ease); }
+        nav a:hover, nav a.active { opacity: 1; }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        
+        .btn-login, .btn-primary { background: var(--lime); color: var(--text-dark); border-radius: var(--r-pill); font-size: var(--text-sm); font-variation-settings: 'opsz' 12, 'wdth' 100, 'wght' 550; display: inline-flex; align-items: center; white-space: nowrap; transition: all var(--t-base) var(--ease); }
+        .btn-login { padding: 10px 22px; gap: 8px; }
+        .btn-primary { padding: 13px 26px; gap: 10px; border: none; cursor: pointer; font-family: inherit; }
+        .btn-login:hover, .btn-primary:hover { background: var(--lime-hover); transform: translateY(-2px); box-shadow: 0 6px 18px var(--lime-shadow); }
+        .btn-login .dot { width: 6px; height: 6px; background: var(--text-dark); border-radius: 50%; }
+        .btn-primary .arrow { background: var(--text-dark); color: var(--lime); width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; transition: transform var(--t-base) var(--ease-spring); }
+        .btn-primary:hover .arrow { transform: translateX(4px); }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 4px; }
+        .hamburger span { width: 26px; height: 2px; background: var(--text-light); border-radius: 2px; transition: all var(--t-base) var(--ease); }
+        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* ============================================================
+           INTERNAL HERO SECTION
+        ============================================================ */
+        .hero { 
+            position: relative; 
+            min-height: 60svh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            padding: 140px 5% 100px; 
+            background: linear-gradient(160deg, rgba(10, 10, 10, 0.7) 0%, rgba(10, 10, 10, 0.85) 100%), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop') center / cover; 
+            color: var(--text-light); 
+            text-align: center;
+        }
+        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 150px; background: linear-gradient(to top, var(--bg-page), transparent); pointer-events: none; z-index: 1; }
+        
+        .hero-content { position: relative; z-index: 2; max-width: 900px; animation: fadeUp 0.9s var(--ease) both; }
+        
+        .hero-tag { font-size: var(--text-xs); font-variation-settings: 'wght' 520; letter-spacing: 0.07em; text-transform: uppercase; border: 1px solid rgba(255, 255, 255, 0.22); padding: 6px 14px 6px 12px; border-radius: var(--r-pill); display: inline-flex; align-items: center; gap: 9px; margin-bottom: 24px; background: rgba(255,255,255,0.05); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+        .pulse-dot { width: 6px; height: 6px; background: var(--lime); border-radius: 50%; animation: pulse-green 2.2s infinite; }
+        @keyframes pulse-green { 0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(203, 243, 91, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(203, 243, 91, 0); } 100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(203, 243, 91, 0); } }
+
+        .hero h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-variation-settings: 'wght' 480; line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 22px; }
+        .hero p { font-size: clamp(1.05rem, 1.5vw, 1.2rem); font-variation-settings: 'wght' 380; line-height: 1.65; opacity: 0.9; margin: 0 auto; max-width: 800px; }
+
+        /* ============================================================
+           MAIN CONTENT WRAPPER
+        ============================================================ */
+        .page-content { background-color: var(--bg-page); position: relative; z-index: 20; padding-bottom: 0; }
+
+        .ui-section { padding: 80px 5%; max-width: 1200px; margin: 0 auto; }
+
+        /* ============================================================
+           CONTACT GRID (Info + Form)
+        ============================================================ */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        /* CONTACT INFO STYLES */
+        .contact-info-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+            position: sticky;
+            top: 120px;
+        }
+        
+        .contact-block h3 {
+            font-size: 1.3rem;
+            font-variation-settings: 'wght' 600;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+        
+        .contact-email-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 1.1rem;
+            color: var(--text-mid);
+            text-decoration: none;
+            transition: color var(--t-fast);
+            padding: 16px 24px;
+            background: var(--bg-white);
+            border-radius: var(--r-lg);
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: var(--shadow-card);
+            width: fit-content;
+        }
+        .contact-email-link:hover {
+            color: #658117;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        .contact-email-link svg { width: 22px; height: 22px; fill: var(--lime-hover); }
+
+        .social-links-lg { display: flex; gap: 16px; }
+        .social-links-lg a { 
+            width: 52px; height: 52px; 
+            border-radius: 50%; 
+            background: var(--bg-white); 
+            border: 1px solid rgba(0,0,0,0.04); 
+            box-shadow: var(--shadow-card); 
+            display: flex; align-items: center; justify-content: center; 
+            color: var(--text-mid); 
+            transition: all var(--t-fast) var(--ease); 
+        }
+        .social-links-lg a:hover { 
+            transform: translateY(-4px); 
+            background: var(--lime); 
+            border-color: var(--lime); 
+            color: var(--text-dark);
+            box-shadow: 0 10px 25px var(--lime-shadow); 
+        }
+        .social-links-lg svg { width: 22px; height: 22px; fill: currentColor; }
+
+        /* FORM STYLES */
+        .form-card {
+            background: var(--bg-white);
+            border-radius: var(--r-xl);
+            padding: 56px 48px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+        }
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--lime);
+        }
+
+        .form-card h2 {
+            font-size: clamp(2rem, 3vw, 2.4rem);
+            font-variation-settings: 'wght' 600;
+            color: var(--text-dark);
+            margin-bottom: 32px;
+            letter-spacing: -0.02em;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.95rem;
+            font-variation-settings: 'wght' 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: var(--r-md);
+            border: 1px solid #cbd5e1;
+            background: var(--bg-page);
+            font-family: inherit;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            transition: all var(--t-fast);
+        }
+        .form-group input::placeholder, 
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--lime);
+            box-shadow: 0 0 0 4px var(--lime-shadow);
+            background: var(--bg-white);
+        }
+        .form-group textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        .form-card .btn-primary {
+            width: 100%;
+            justify-content: center;
+            padding: 18px;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        /* ============================================================
+           SCROLLING REEL
+        ============================================================ */
+        .scrolling-reel { 
+            width: 100%; 
+            padding: 24px 0; 
+            background: #141414;
+            border-top: 1px solid rgba(255, 255, 255, 0.05); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden; 
+            display: flex; 
+            position: relative;
+            z-index: 20;
+        }
+        .scrolling-track { display: flex; white-space: nowrap; animation: scrollReel 40s linear infinite; }
+        .scrolling-reel:hover .scrolling-track { animation-play-state: paused; }
+        .scrolling-track span { display: inline-flex; align-items: center; color: rgba(255,255,255,0.6); font-size: 0.85rem; font-variation-settings: 'wght' 600; letter-spacing: 0.1em; text-transform: uppercase; }
+        .reel-dot { color: rgba(255,255,255,0.3); margin: 0 28px; font-size: 1.2rem; }
+        @keyframes scrollReel { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        .site-footer { background: linear-gradient(160deg, rgba(10, 10, 10, 0.92) 0%, rgba(10, 10, 10, 0.98) 100%), url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop') center / cover; color: var(--text-light); padding: 80px 5% 30px; position: relative; z-index: 20; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; max-width: 1440px; margin: 0 auto 60px; }
+        .footer-brand-col { max-width: 360px; }
+        .footer-logo { display: flex; align-items: center; gap: 10px; font-variation-settings: 'opsz' 16, 'wdth' 100, 'wght' 650; font-size: 1.25rem; letter-spacing: 0.02em; color: var(--text-light); margin-bottom: 24px; }
+        .footer-logo img { height: 38px; width: 38px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(255,255,255,0.25); }
+        .footer-brand-col p { color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.6; margin-bottom: 28px; }
+        .footer-socials { display: flex; gap: 12px; }
+        .footer-socials a { width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid transparent; display: flex; align-items: center; justify-content: center; transition: all var(--t-fast) var(--ease); color: var(--text-light); }
+        .footer-socials a:hover { background: var(--lime); border-color: var(--lime); color: var(--text-dark); transform: translateY(-3px); box-shadow: 0 8px 24px var(--lime-shadow); }
+        .footer-socials svg { width: 18px; height: 18px; fill: currentColor; }
+        .footer-col h4 { font-size: 1.1rem; font-variation-settings: 'wght' 600; color: var(--text-light); margin-bottom: 24px; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+        .footer-col ul a { color: rgba(255,255,255,0.7); font-size: 0.95rem; transition: all var(--t-fast) var(--ease); }
+        .footer-col ul a:hover { color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; max-width: 1440px; margin: 0 auto; flex-wrap: wrap; gap: 20px; }
+        .footer-bottom p { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+        .footer-bottom-links { display: flex; gap: 24px; }
+        .footer-bottom-links a { color: rgba(255,255,255,0.5); font-size: 0.85rem; transition: color var(--t-fast); }
+        .footer-bottom-links a:hover { color: var(--text-light); text-shadow: 0 0 8px rgba(255, 255, 255, 0.3); }
+
+        /* ============================================================
+           RESPONSIVE DESIGN
+        ============================================================ */
+        @media (max-width: 1150px) {
+            .hamburger { display: flex; }
+            .nav-wrapper { position: fixed; top: 0; right: -100%; width: 100%; height: 100dvh; background: rgba(30, 30, 30, 0.45); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); flex-direction: column; justify-content: center; align-items: center; transition: right var(--t-base) var(--ease); gap: 28px; z-index: 100; }
+            .nav-wrapper.active { right: 0; }
+            nav { flex-direction: column; align-items: center; gap: 20px; }
+            nav a { font-size: 1.15rem; opacity: 0.7; }
+        }
+
+        @media (max-width: 992px) {
+            .contact-grid { grid-template-columns: 1fr; gap: 50px; }
+            .contact-info-wrapper { position: relative; top: 0; flex-direction: row; flex-wrap: wrap; gap: 40px; justify-content: space-between; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 22px 5%; }
+            .hero { padding: 120px 5% 80px; }
+            .ui-section { padding: 60px 5%; }
+            
+            .contact-info-wrapper { flex-direction: column; gap: 40px; }
+            .form-card { padding: 40px 24px; }
+
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / NAVBAR -->
+    <header>
+        <div class="logo" id="header-logo">
+            <a href="/">
+                <img src="https://primary.jwwb.nl/public/t/e/b/temp-phgcdwbfzcsnurmrysqy/image-2-standard.jpg" alt="SCASF Logo" id="logo-butterfly">
+            </a>
+            <a href="/" class="logo-text">SCASF</a>
+        </div>
+        <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="nav-wrapper" id="nav-wrapper">
+            <nav>
+                <a href="/about">About us</a>
+                <a href="/stories">Our stories</a>
+                <a href="/advocacy">Advocacy</a>
+                <a href="/community">Community hub</a>
+                <a href="/learning">Learning</a>
+                <a href="/faqs">FAQs</a>
+                <a href="/contact" class="active">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="https://chat.whatsapp.com/B9sLilTEEoEGB42D48Owia" target="_blank" class="btn-login">
+                    <span class="dot"></span> Join our community
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">
+                <span class="pulse-dot"></span>
+                Get in touch
+            </span>
+            <h1>Connect with us</h1>
+            <p>Whether you're looking to book a talk or training session, share your personal story, ask a question about Sickle Cell, or explore partnership opportunities, we're here to listen and help. We pride ourselves on our adaptability and commitment to excellence in every aspect of our service.</p>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="page-content">
+
+        <!-- CONTACT GRID SECTION -->
+        <section class="ui-section" style="padding-top: 40px; padding-bottom: 100px;">
+            <div class="contact-grid">
+                
+                <!-- Left Column: Info -->
+                <div class="contact-info-wrapper reveal">
+                    <div class="contact-block">
+                        <p style="color: var(--text-mid); line-height: 1.7; margin-bottom: 30px; font-size: 1.1rem;">
+                            Please provide your name, the reason for contacting us, and how we can best assist you. Get in touch to see how we can contribute to your success and raise awareness about Sickle Cell.
+                        </p>
+                    </div>
+
+                    <!-- Email Info -->
+                    <div class="contact-block">
+                        <h3>Email</h3>
+                        <a href="mailto:info@beyond-the-crisis.com" class="contact-email-link">
+                            <svg viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"/></svg>
+                            info@beyond-the-crisis.com
+                        </a>
+                    </div>
+
+                    <!-- Socials Info -->
+                    <div class="contact-block">
+                        <h3>Socials</h3>
+                        <div class="social-links-lg">
+                            <a href="#" aria-label="Twitter">
+                                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                            </a>
+                            <a href="#" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path></svg>
+                            </a>
+                            <a href="#" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Form -->
+                <div class="reveal" style="transition-delay: 0.1s;">
+                    <form action="#" method="POST" class="form-card" aria-label="Contact form">
+                        <h2>Contact us</h2>
+                        
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your full name" required aria-required="true">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email address *</label>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" required aria-required="true">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" placeholder="How can we help you?" required aria-required="true"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">
+                            Send Message <span class="arrow">→</span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SCROLLING REEL -->
+        <div class="scrolling-reel">
+            <div class="scrolling-track">
+                <span>
+                    SHARING AUTHENTIC STORIES <span class="reel-dot">•</span>
+                    PROVIDING COMMUNITY SUPPORT <span class="reel-dot">•</span>
+                    EDUCATING SCHOOLS &amp; INSTITUTIONS <span class="reel-dot">•</span>
+                    FOSTERING DIGNITY &amp; UNDERSTANDING <span class="reel-dot">•</span>
+                    ADVOCATING FOR INCLUSIVE WORKPLACES <span class="reel-dot">•</span>
+                </span>
+                <span>
+                    SHARING AUTHENTIC STORIES <span class="reel-dot">•</span>
+                    PROVIDING COMMUNITY SUPPORT <span class="reel-dot">•</span>
+                    EDUCATING SCHOOLS &amp; INSTITUTIONS <span class="reel-dot">•</span>
+                    FOSTERING DIGNITY &amp; UNDERSTANDING <span class="reel-dot">•</span>
+                    ADVOCATING FOR INCLUSIVE WORKPLACES <span class="reel-dot">•</span>
+                </span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MODERN FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <!-- Column 1: Brand -->
+            <div class="footer-brand-col">
+                <div class="footer-logo">
+                    <img src="https://primary.jwwb.nl/public/t/e/b/temp-phgcdwbfzcsnurmrysqy/image-2-standard.jpg" alt="SCASF Logo">
+                    SCASF
+                </div>
+                <p>Sickle Cell Awareness &amp; Support Foundation.<br>Empowering lives beyond the crisis through authentic stories, education, and inclusive advocacy.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path></svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="footer-col">
+                <h4>Foundation</h4>
+                <ul>
+                    <li><a href="/about">About us</a></li>
+                    <li><a href="/stories">Our stories</a></li>
+                    <li><a href="/team">Our team</a></li>
+                    <li><a href="/careers">Careers</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="footer-col">
+                <h4>Community</h4>
+                <ul>
+                    <li><a href="/community">Community hub</a></li>
+                    <li><a href="/events">Events &amp; workshops</a></li>
+                    <li><a href="/advocacy">Advocacy work</a></li>
+                    <li><a href="/volunteer">Volunteer</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4 -->
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="/learning">Learning center</a></li>
+                    <li><a href="/articles">Articles &amp; news</a></li>
+                    <li><a href="/faqs">FAQs</a></li>
+                    <li><a href="/contact">Contact us</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Sickle Cell Awareness &amp; Support Foundation. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="/privacy">Privacy policy</a>
+                <a href="/terms">Terms of service</a>
+                <a href="/cookies">Cookie policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // --- LOGO REVEAL LOGIC ---
+        const headerLogo = document.getElementById('header-logo');
+        const logoButterfly = document.getElementById('logo-butterfly');
+        let logoTimer;
+
+        if (logoButterfly && headerLogo) {
+            logoButterfly.addEventListener('click', (e) => {
+                e.stopPropagation();
+                headerLogo.classList.add('show-text');
+                clearTimeout(logoTimer);
+                logoTimer = setTimeout(() => {
+                    headerLogo.classList.remove('show-text');
+                }, 3000);
+            });
+        }
+
+        // --- MOBILE MENU ---
+        const hamburger   = document.getElementById('hamburger');
+        const navWrapper  = document.getElementById('nav-wrapper');
+        const allNavLinks = document.querySelectorAll('.nav-wrapper nav a, .nav-actions a');
+
+        hamburger.addEventListener('click', () => {
+            const isOpen = navWrapper.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+
+        allNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navWrapper.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // --- SCROLL REVEAL ---
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer  = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        revealEls.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
