@@ -6,9 +6,19 @@
     <title>Sickle Cell Awareness &amp; Support Foundation (SCASF)</title>
     <meta name="description" content="Empowering lives beyond the crisis. SCASF is a space for learning, listening, and building a more inclusive future for people living with sickle cell.">
     <link rel="icon" type="image/jpeg" href="https://primary.jwwb.nl/public/t/e/b/temp-phgcdwbfzcsnurmrysqy/image-2-standard.jpg">
+    
+    <!-- Preload critical Hero background image for LCP improvement -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,75..125,100..1000&display=swap" rel="stylesheet">
+    
+    <!-- Asynchronous CSS loading for Google Fonts to prevent render-blocking -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,75..125,100..1000&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,75..125,100..1000&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,75..125,100..1000&display=swap" rel="stylesheet">
+    </noscript>
 
     <style>
         /* ============================================================
@@ -21,7 +31,7 @@
 
             --text-dark:      #0f172a;
             --text-mid:       #475569;
-            --text-muted:     #94a3b8;
+            --text-muted:     #64748b; /* Improved contrast ratio for accessibility */
             --text-light:     #ffffff;
 
             --bg-white:       #ffffff;
@@ -108,7 +118,7 @@
         .btn-primary .arrow { background: var(--text-dark); color: var(--lime); width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; transition: transform var(--t-base) var(--ease-spring); }
         .btn-primary:hover .arrow { transform: translateX(4px); }
 
-        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 4px; }
+        .hamburger { border: none; background: transparent; display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; padding: 4px; }
         .hamburger span { width: 26px; height: 2px; background: var(--text-light); border-radius: 2px; transition: all var(--t-base) var(--ease); }
         .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
         .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
@@ -122,8 +132,12 @@
         .hero-content { display: grid; grid-template-columns: 1.15fr 1fr; gap: 60px; width: 100%; align-items: end; position: relative; z-index: 2; }
         .hero-text { animation: fadeUp 0.9s var(--ease) both; }
         .hero-tag { font-size: var(--text-xs); font-variation-settings: 'wght' 520; letter-spacing: 0.07em; text-transform: uppercase; border: 1px solid rgba(255, 255, 255, 0.22); padding: 6px 14px 6px 12px; border-radius: var(--r-pill); display: inline-flex; align-items: center; gap: 9px; margin-bottom: 22px; background: rgba(255,255,255,0.05); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-        .pulse-dot { width: 6px; height: 6px; background: var(--lime); border-radius: 50%; animation: pulse-green 2.2s infinite; }
-        @keyframes pulse-green { 0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(203, 243, 91, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(203, 243, 91, 0); } 100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(203, 243, 91, 0); } }
+        
+        /* Composited animation fix (Lighthouse Optimization) */
+        .pulse-dot { position: relative; width: 6px; height: 6px; background: var(--lime); border-radius: 50%; z-index: 1; }
+        .pulse-dot::before { content: ''; position: absolute; inset: -4px; background: var(--lime); border-radius: 50%; z-index: -1; animation: pulse-green 2.2s ease-out infinite; }
+        @keyframes pulse-green { 0% { transform: scale(0.5); opacity: 0.8; } 70% { transform: scale(2.5); opacity: 0; } 100% { transform: scale(2.5); opacity: 0; } }
+        
         .hero h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-variation-settings: 'wght' 480; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 22px; }
         .hero p { font-size: clamp(0.95rem, 1.5vw, 1.1rem); font-variation-settings: 'wght' 380; line-height: 1.65; opacity: 0.88; margin-bottom: 32px; max-width: 480px; }
 
@@ -138,7 +152,7 @@
         .card-content-wrapper.slide-out-left { opacity: 0; transform: translateX(-36px); }
         .card-content-wrapper.slide-out-right { opacity: 0; transform: translateX(36px); }
         .card-content-wrapper.no-transition { transition: none !important; }
-        .glass-card h3 { font-size: var(--text-lg); font-variation-settings: 'wght' 620; margin-bottom: 14px; }
+        .glass-card h2 { font-size: var(--text-lg); font-variation-settings: 'wght' 620; margin-bottom: 14px; }
         .glass-card p { font-size: var(--text-sm); line-height: 1.65; color: rgba(255,255,255,0.82); margin-bottom: 22px; }
         .glass-card .learn-more { font-size: var(--text-sm); font-variation-settings: 'wght' 530; display: inline-flex; align-items: center; gap: 5px; transition: all var(--t-fast) var(--ease); }
         .glass-card .learn-more:hover { color: var(--lime); gap: 9px; }
@@ -181,104 +195,26 @@
         }
 
         /* Shared Section Styles */
-        .ui-section {
-            padding: 100px 5%;
-            max-width: 1440px;
-            margin: 0 auto;
-        }
-
-        .ui-section.bg-alt {
-            background-color: var(--bg-white);
-            max-width: 100%;
-            padding-left: 5%;
-            padding-right: 5%;
-            border-top: 1px solid rgba(0,0,0,0.04);
-            border-bottom: 1px solid rgba(0,0,0,0.04);
-        }
-        .ui-section.bg-alt > .section-header,
-        .ui-section.bg-alt > .team-header-layout,
-        .ui-section.bg-alt > .card-grid,
-        .ui-section.bg-alt > .team-grid {
-            max-width: 1300px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 48px;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-
+        .ui-section { padding: 100px 5%; max-width: 1440px; margin: 0 auto; }
+        .ui-section.bg-alt { background-color: var(--bg-white); max-width: 100%; padding-left: 5%; padding-right: 5%; border-top: 1px solid rgba(0,0,0,0.04); border-bottom: 1px solid rgba(0,0,0,0.04); }
+        .ui-section.bg-alt > .section-header, .ui-section.bg-alt > .team-header-layout, .ui-section.bg-alt > .card-grid, .ui-section.bg-alt > .team-grid { max-width: 1300px; margin-left: auto; margin-right: auto; }
+        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; gap: 40px; flex-wrap: wrap; }
         .header-text { max-width: 600px; }
 
-        .ui-tag {
-            color: var(--text-dark);
-            font-size: var(--text-xs);
-            font-variation-settings: 'wght' 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-        
-        .ui-tag::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--lime);
-            border-radius: 50%;
-            display: inline-block;
-            flex-shrink: 0;
-        }
-
-        .ui-section h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-variation-settings: 'opsz' 48, 'wdth' 100, 'wght' 600;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
-            color: var(--text-dark);
-        }
-
-        .header-desc {
-            font-size: 1.05rem;
-            color: var(--text-mid);
-            line-height: 1.6;
-            max-width: 480px;
-        }
+        .ui-tag { color: var(--text-dark); font-size: var(--text-xs); font-variation-settings: 'wght' 600; letter-spacing: 0.08em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+        .ui-tag::before { content: ''; width: 6px; height: 6px; background: var(--lime); border-radius: 50%; display: inline-block; flex-shrink: 0; }
+        .ui-section h2 { font-size: clamp(2rem, 4vw, 3rem); font-variation-settings: 'opsz' 48, 'wdth' 100, 'wght' 600; line-height: 1.1; letter-spacing: -0.03em; color: var(--text-dark); }
+        .header-desc { font-size: 1.05rem; color: var(--text-mid); line-height: 1.6; max-width: 480px; }
 
         /* ============================================================
            CARD COMPONENT SYSTEM
         ============================================================ */
-        .card-grid {
-            display: grid;
-            gap: 32px;
-        }
-
+        .card-grid { display: grid; gap: 32px; }
         .story-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
-
-        .ui-card {
-            background: var(--bg-white);
-            border-radius: var(--r-xl);
-            overflow: hidden;
-            box-shadow: var(--shadow-card);
-            display: flex;
-            flex-direction: column;
-            transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
-            position: relative;
-            height: 100%;
-        }
-
+        .ui-card { background: var(--bg-white); border-radius: var(--r-xl); overflow: hidden; box-shadow: var(--shadow-card); display: flex; flex-direction: column; transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease); position: relative; height: 100%; }
         .ui-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
 
-        @media (min-width: 768px) {
-            .founder-statement-card { grid-column: span 2; }
-        }
+        @media (min-width: 768px) { .founder-statement-card { grid-column: span 2; } }
 
         .card-img-wrap { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: var(--bg-border); }
         .card-img-wrap.tall { aspect-ratio: 3/4; }
@@ -287,12 +223,7 @@
         .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
         .ui-card:hover .card-img-wrap img { transform: scale(1.05); }
 
-        .card-badge {
-            position: absolute; top: 16px; left: 16px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06); z-index: 2; cursor: pointer; transition: transform 0.2s var(--ease-spring), box-shadow 0.2s var(--ease);
-        }
+        .card-badge { position: absolute; top: 16px; left: 16px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: 50%; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); z-index: 2; cursor: pointer; transition: transform 0.2s var(--ease-spring), box-shadow 0.2s var(--ease); }
         .card-badge:hover { transform: scale(1.15) rotate(15deg); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
         .card-badge:active { transform: scale(0.95); }
         .card-badge svg { width: 16px; height: 16px; fill: #f59e0b; }
@@ -306,23 +237,12 @@
         .meta-item.clickable-meta { cursor: pointer; user-select: none; }
         .meta-item svg { width: 16px; height: 16px; stroke: var(--text-muted); stroke-width: 2; fill: transparent; transition: fill 0.3s ease, stroke 0.3s ease; }
 
-        @keyframes heartJump {
-            0% { transform: scale(1); }
-            30% { transform: scale(1.3) translateY(-3px); }
-            50% { transform: scale(0.9) translateY(0); }
-            70% { transform: scale(1.15) translateY(-1px); }
-            100% { transform: scale(1) translateY(0); }
-        }
+        @keyframes heartJump { 0% { transform: scale(1); } 30% { transform: scale(1.3) translateY(-3px); } 50% { transform: scale(0.9) translateY(0); } 70% { transform: scale(1.15) translateY(-1px); } 100% { transform: scale(1) translateY(0); } }
         .jump-animation { animation: heartJump 0.5s ease-out; }
         .ui-card.dark-bleed .meta-item.clickable-meta.liked svg { fill: #ef4444; stroke: #ef4444; }
 
         .card-divider { height: 1px; background: var(--bg-border); margin: auto -24px 20px -24px; width: calc(100% + 48px); }
-
-        .card-btn {
-            display: block; width: 100%; text-align: center; background: var(--text-dark); color: var(--text-light);
-            padding: 14px; border-radius: var(--r-pill); font-size: 0.9rem; font-variation-settings: 'wght' 600;
-            transition: all var(--t-fast) var(--ease); cursor: pointer; border: none;
-        }
+        .card-btn { display: block; width: 100%; text-align: center; background: var(--text-dark); color: var(--text-light); padding: 14px; border-radius: var(--r-pill); font-size: 0.9rem; font-variation-settings: 'wght' 600; transition: all var(--t-fast) var(--ease); cursor: pointer; border: none; }
         .card-btn:hover { background: var(--lime); color: var(--text-dark); box-shadow: 0 6px 18px var(--lime-shadow); }
 
         .ui-card.dark-bleed { color: var(--text-light); }
@@ -335,543 +255,104 @@
         .ui-card.dark-bleed .meta-item { color: rgba(255,255,255,0.8); }
         .ui-card.dark-bleed .meta-item svg { stroke: rgba(255,255,255,0.8); }
 
-        .glass-quote-icon {
-            width: 52px; height: 52px;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.4));
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(0,0,0,0.08);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06), inset 0 2px 4px rgba(255,255,255,1);
-        }
+        .glass-quote-icon { width: 52px; height: 52px; margin-bottom: 24px; background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.4)); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(0,0,0,0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0,0,0,0.06), inset 0 2px 4px rgba(255,255,255,1); }
         .glass-quote-icon svg { width: 24px; height: 24px; fill: var(--text-dark); }
 
         /* ============================================================
            TEAM SECTION
         ============================================================ */
-        .team-header-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 48px;
-            align-items: end;
-        }
-
+        .team-header-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 48px; align-items: end; }
         .team-header-left .ui-tag { margin-bottom: 12px; }
-
-        .team-header-left h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-variation-settings: 'opsz' 48, 'wdth' 100, 'wght' 600;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
-            color: var(--text-dark);
-        }
-
+        .team-header-left h2 { font-size: clamp(2rem, 4vw, 3rem); font-variation-settings: 'opsz' 48, 'wdth' 100, 'wght' 600; line-height: 1.1; letter-spacing: -0.03em; color: var(--text-dark); }
         .team-header-left h2 .text-gray { color: var(--text-muted); }
+        .team-header-desc { font-size: 1.05rem; color: var(--text-mid); line-height: 1.6; max-width: 480px; }
 
-        .team-header-desc {
-            font-size: 1.05rem;
-            color: var(--text-mid);
-            line-height: 1.6;
-            max-width: 480px;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .team-member-card {
-            position: relative;
-            aspect-ratio: 3 / 3.6;
-            overflow: hidden;
-            border-radius: var(--r-xl); 
-            background-color: #d8e0ea;
-            cursor: pointer;
-            box-shadow: var(--shadow-card); 
-            transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease); 
-        }
-
-        .team-member-card:hover {
-            transform: translateY(-6px); 
-            box-shadow: var(--shadow-hover);
-        }
-
-        .team-member-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            inset: 0;
-            transition: transform 0.6s var(--ease);
-        }
-
+        .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .team-member-card { position: relative; aspect-ratio: 3 / 3.6; overflow: hidden; border-radius: var(--r-xl); background-color: #d8e0ea; cursor: pointer; box-shadow: var(--shadow-card); transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease); }
+        .team-member-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+        .team-member-card img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; transition: transform 0.6s var(--ease); }
         .team-member-card:hover img { transform: scale(1.05); } 
+        .team-member-card .placeholder-svg { width: 52%; height: 52%; fill: #b8c4d4; position: absolute; bottom: -4%; left: 50%; transform: translateX(-50%); }
 
-        .team-member-card .placeholder-svg {
-            width: 52%;
-            height: 52%;
-            fill: #b8c4d4;
-            position: absolute;
-            bottom: -4%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .team-card-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.18) 55%, transparent 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 24px;
-            color: var(--text-light);
-            z-index: 2;
-        }
-
+        .team-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.18) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; color: var(--text-light); z-index: 2; }
         .team-info { margin-bottom: 12px; }
-
-        .team-info h4 {
-            font-size: 1.05rem;
-            font-variation-settings: 'wght' 650;
-            margin-bottom: 3px;
-            color: var(--text-light);
-            line-height: 1.2;
-        }
-
-        .team-info p {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.72);
-            margin: 0;
-        }
-
-        .team-footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            padding-top: 12px;
-        }
-
-        .team-footer a {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            font-size: 0.8rem;
-            font-variation-settings: 'wght' 520;
-            color: rgba(255,255,255,0.75);
-            transition: color var(--t-fast) var(--ease);
-        }
-
+        .team-info h3 { font-size: 1.05rem; font-variation-settings: 'wght' 650; margin-bottom: 3px; color: var(--text-light); line-height: 1.2; }
+        .team-info p { font-size: 0.8rem; color: rgba(255, 255, 255, 0.72); margin: 0; }
+        .team-footer { border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 12px; }
+        .team-footer a { display: flex; align-items: center; justify-content: space-between; width: 100%; font-size: 0.8rem; font-variation-settings: 'wght' 520; color: rgba(255,255,255,0.75); transition: color var(--t-fast) var(--ease); }
         .team-footer a:hover { color: var(--lime); }
-
-        .team-footer svg {
-            width: 14px;
-            height: 14px;
-            stroke: currentColor;
-            stroke-width: 2;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            flex-shrink: 0;
-        }
+        .team-footer svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 
         /* ============================================================
            FAQ ACCORDION
         ============================================================ */
-        .faq-container {
-            max-width: 900px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .faq-item {
-            background: var(--bg-white);
-            border: 1px solid var(--bg-border);
-            border-radius: var(--r-xl); 
-            overflow: hidden;
-            transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease), border-color var(--t-base) var(--ease);
-            box-shadow: var(--shadow-card); 
-        }
-
-        .faq-item:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .faq-item.active {
-            border-color: rgba(0,0,0,0.08);
-            box-shadow: var(--shadow-hover);
-            transform: none; 
-        }
-
-        .faq-question {
-            padding: 24px 28px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            font-size: 1rem;
-            font-variation-settings: 'wght' 620;
-            color: var(--text-dark);
-            background: transparent;
-            user-select: none;
-            gap: 16px;
-        }
-
-        .faq-answer {
-            max-height: 0;
-            padding: 0 28px;
-            opacity: 0;
-            transition: all 0.4s var(--ease);
-            color: var(--text-mid);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-            padding: 24px 28px; 
-            opacity: 1;
-        }
-
-        .faq-icon {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: var(--bg-page);
-            border: 1px solid var(--bg-border);
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
-        }
-
-        .faq-item.active .faq-icon {
-            background: var(--lime);
-            border-color: var(--lime);
-        }
-
-        .faq-icon::before, .faq-icon::after {
-            content: '';
-            position: absolute;
-            background: var(--text-dark);
-            border-radius: 2px;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
+        .faq-container { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+        .faq-item { background: var(--bg-white); border: 1px solid var(--bg-border); border-radius: var(--r-xl); overflow: hidden; transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease), border-color var(--t-base) var(--ease); box-shadow: var(--shadow-card); }
+        .faq-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+        .faq-item.active { border-color: rgba(0,0,0,0.08); box-shadow: var(--shadow-hover); transform: none; }
+        .faq-question { padding: 24px 28px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 1rem; font-variation-settings: 'wght' 620; color: var(--text-dark); background: transparent; user-select: none; gap: 16px; }
+        .faq-answer { max-height: 0; padding: 0 28px; opacity: 0; transition: all 0.4s var(--ease); color: var(--text-mid); font-size: 0.95rem; line-height: 1.7; }
+        .faq-item.active .faq-answer { max-height: 500px; padding: 24px 28px; opacity: 1; }
+        .faq-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--bg-page); border: 1px solid var(--bg-border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; position: relative; transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease); }
+        .faq-item.active .faq-icon { background: var(--lime); border-color: var(--lime); }
+        .faq-icon::before, .faq-icon::after { content: ''; position: absolute; background: var(--text-dark); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; }
         .faq-icon::before { width: 10px; height: 1.5px; }
         .faq-icon::after  { width: 1.5px; height: 10px; }
         .faq-item.active .faq-icon::after { transform: rotate(90deg); opacity: 0; }
-
-        .faq-item.active .faq-question {
-            border-bottom: 1px solid var(--bg-border);
-            padding-bottom: 0;
-        }
+        .faq-item.active .faq-question { border-bottom: 1px solid var(--bg-border); padding-bottom: 0; }
 
         /* ============================================================
            NEWSLETTER
         ============================================================ */
-        .newsletter-section {
-            position: relative;
-            background: linear-gradient(160deg, rgba(10,10,10,0.78) 0%, rgba(10,10,10,0.92) 100%),
-                        url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop') center / cover fixed;
-            padding: 0;
-            z-index: 20;
-        }
-
-        .newsletter-inner {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 100px 5%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 60px;
-            flex-wrap: wrap;
-        }
-
-        .newsletter-info {
-            max-width: 480px;
-            color: var(--text-light);
-        }
-
-        .newsletter-info .ui-tag {
-            color: rgba(255,255,255,0.6);
-            font-size: var(--text-xs);
-            font-variation-settings: 'wght' 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .newsletter-info .ui-tag::before {
-            background: var(--lime);
-        }
-
-        .newsletter-info h2 {
-            font-size: clamp(1.9rem, 3.5vw, 2.8rem);
-            font-variation-settings: 'opsz' 48, 'wdth' 100, 'wght' 600;
-            line-height: 1.1;
-            letter-spacing: -0.025em;
-            color: var(--text-light);
-            margin-bottom: 14px;
-        }
-
-        .newsletter-info p {
-            color: rgba(255,255,255,0.72);
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-
-        .newsletter-form-wrap {
-            background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 28px; 
-            padding: 36px;
-            flex: 1;
-            max-width: 480px;
-            min-width: 300px;
-            box-shadow: 0 12px 50px rgba(0,0,0,0.28);
-        }
-
-        .newsletter-form-wrap p {
-            font-size: var(--text-sm);
-            color: rgba(255,255,255,0.55);
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .newsletter-form {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .newsletter-form input {
-            width: 100%;
-            padding: 14px 20px;
-            border-radius: var(--r-pill);
-            border: 1px solid rgba(255,255,255,0.14);
-            background: rgba(255,255,255,0.07);
-            color: var(--text-light);
-            outline: none;
-            font-size: 0.95rem;
-            font-family: inherit;
-            font-variation-settings: 'wght' 400;
-            transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast);
-        }
-
+        .newsletter-section { position: relative; background: linear-gradient(160deg, rgba(10,10,10,0.78) 0%, rgba(10,10,10,0.92) 100%), url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop') center / cover fixed; padding: 0; z-index: 20; }
+        .newsletter-inner { max-width: 1440px; margin: 0 auto; padding: 100px 5%; display: flex; align-items: center; justify-content: space-between; gap: 60px; flex-wrap: wrap; }
+        .newsletter-info { max-width: 480px; color: var(--text-light); }
+        .newsletter-info .ui-tag { color: rgba(255,255,255,0.6); font-size: var(--text-xs); font-variation-settings: 'wght' 600; letter-spacing: 0.08em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+        .newsletter-info .ui-tag::before { background: var(--lime); }
+        .newsletter-info h2 { font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-variation-settings: 'opsz' 48, 'wdth' 100, 'wght' 600; line-height: 1.1; letter-spacing: -0.025em; color: var(--text-light); margin-bottom: 14px; }
+        .newsletter-info p { color: rgba(255,255,255,0.72); font-size: 1.05rem; line-height: 1.6; }
+        .newsletter-form-wrap { background: rgba(255,255,255,0.06); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.12); border-radius: 28px; padding: 36px; flex: 1; max-width: 480px; min-width: 300px; box-shadow: 0 12px 50px rgba(0,0,0,0.28); }
+        .newsletter-form-wrap p { font-size: var(--text-sm); color: rgba(255,255,255,0.55); margin-bottom: 20px; line-height: 1.5; }
+        .newsletter-form { display: flex; flex-direction: column; gap: 12px; }
+        .newsletter-form input { width: 100%; padding: 14px 20px; border-radius: var(--r-pill); border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.07); color: var(--text-light); outline: none; font-size: 0.95rem; font-family: inherit; font-variation-settings: 'wght' 400; transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast); }
         .newsletter-form input::placeholder { color: rgba(255,255,255,0.38); }
-
-        .newsletter-form input:focus {
-            border-color: rgba(203,243,91,0.5);
-            background: rgba(255,255,255,0.1);
-            box-shadow: 0 0 0 3px rgba(203,243,91,0.12);
-        }
-
-        .newsletter-form button {
-            background: var(--lime);
-            color: var(--text-dark);
-            border: none;
-            border-radius: var(--r-pill);
-            padding: 14px 28px;
-            font-size: 0.95rem;
-            font-variation-settings: 'wght' 600;
-            font-family: inherit;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all var(--t-fast) var(--ease);
-        }
-
-        .newsletter-form button:hover {
-            background: var(--lime-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px var(--lime-shadow);
-        }
-
-        .newsletter-form button .arrow {
-            background: var(--text-dark);
-            color: var(--lime);
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            transition: transform var(--t-base) var(--ease-spring);
-        }
-
+        .newsletter-form input:focus { border-color: rgba(203,243,91,0.5); background: rgba(255,255,255,0.1); box-shadow: 0 0 0 3px rgba(203,243,91,0.12); }
+        .newsletter-form button { background: var(--lime); color: var(--text-dark); border: none; border-radius: var(--r-pill); padding: 14px 28px; font-size: 0.95rem; font-variation-settings: 'wght' 600; font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all var(--t-fast) var(--ease); }
+        .newsletter-form button:hover { background: var(--lime-hover); transform: translateY(-2px); box-shadow: 0 6px 18px var(--lime-shadow); }
+        .newsletter-form button .arrow { background: var(--text-dark); color: var(--lime); width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; transition: transform var(--t-base) var(--ease-spring); }
         .newsletter-form button:hover .arrow { transform: translateX(3px); }
 
         /* ============================================================
            FOOTER
         ============================================================ */
-        .site-footer {
-            background: linear-gradient(180deg, rgba(10,10,10,0.95) 0%, #050a0f 100%),
-                        url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop') center / cover;
-            color: var(--text-light);
-            /* Increased footer padding for more vertical length */
-            padding: 120px 5% 48px;
-            position: relative;
-            z-index: 20;
-        }
-
-        .site-footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 5%;
-            right: 5%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(203,243,91,0.25), transparent);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 50px;
-            max-width: 1440px;
-            /* Increased bottom margin */
-            margin: 0 auto 80px;
-        }
-
+        .site-footer { background: linear-gradient(180deg, rgba(10,10,10,0.95) 0%, #050a0f 100%), url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070&auto=format&fit=crop') center / cover; color: var(--text-light); padding: 120px 5% 48px; position: relative; z-index: 20; }
+        .site-footer::before { content: ''; position: absolute; top: 0; left: 5%; right: 5%; height: 1px; background: linear-gradient(90deg, transparent, rgba(203,243,91,0.25), transparent); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; max-width: 1440px; margin: 0 auto 80px; }
         .footer-brand-col { max-width: 360px; }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-variation-settings: 'opsz' 16, 'wdth' 100, 'wght' 650;
-            font-size: 1.1rem;
-            letter-spacing: 0.02em;
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
-
-        .footer-logo img {
-            height: 36px;
-            width: 36px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1.5px solid rgba(255,255,255,0.22);
-        }
-
-        .footer-brand-col > p {
-            color: rgba(255,255,255,0.6);
-            font-size: 0.92rem;
-            line-height: 1.65;
-            margin-bottom: 28px;
-        }
-
+        .footer-logo { display: flex; align-items: center; gap: 10px; font-variation-settings: 'opsz' 16, 'wdth' 100, 'wght' 650; font-size: 1.1rem; letter-spacing: 0.02em; color: var(--text-light); margin-bottom: 20px; }
+        .footer-logo img { height: 36px; width: 36px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(255,255,255,0.22); }
+        .footer-brand-col > p { color: rgba(255,255,255,0.6); font-size: 0.92rem; line-height: 1.65; margin-bottom: 28px; }
         .footer-socials { display: flex; gap: 10px; }
-
-        .footer-socials a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all var(--t-fast) var(--ease);
-            color: var(--text-light);
-        }
-
-        .footer-socials a:hover {
-            background: var(--lime);
-            border-color: var(--lime);
-            color: var(--text-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px var(--lime-shadow);
-        }
-
+        .footer-socials a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: all var(--t-fast) var(--ease); color: var(--text-light); }
+        .footer-socials a:hover { background: var(--lime); border-color: var(--lime); color: var(--text-dark); transform: translateY(-3px); box-shadow: 0 8px 24px var(--lime-shadow); }
         .footer-socials svg { width: 16px; height: 16px; fill: currentColor; }
-
-        .footer-col h4 {
-            font-size: 0.8rem;
-            font-variation-settings: 'wght' 650;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.45);
-            margin-bottom: 20px;
-        }
-
-        /* Increased vertical gap for links to elongate the footer naturally */
+        .footer-col h3 { font-size: 0.8rem; font-variation-settings: 'wght' 650; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 20px; } /* Increased contrast */
         .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
-
-        .footer-col ul a {
-            color: rgba(255,255,255,0.7);
-            font-size: 0.92rem;
-            font-variation-settings: 'wght' 430;
-            transition: all var(--t-fast) var(--ease);
-            display: inline-flex;
-            align-items: center;
-            gap: 0;
-        }
-
-        .footer-col ul a:hover {
-            color: var(--text-light);
-            gap: 4px;
-        }
-
+        .footer-col ul a { color: rgba(255,255,255,0.7); font-size: 0.92rem; font-variation-settings: 'wght' 430; transition: all var(--t-fast) var(--ease); display: inline-flex; align-items: center; gap: 0; }
+        .footer-col ul a:hover { color: var(--text-light); gap: 4px; }
         .footer-col ul li { position: relative; }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(255,255,255,0.07);
-            padding-top: 28px;
-            max-width: 1440px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-
-        .footer-bottom p {
-            color: rgba(255,255,255,0.35);
-            font-size: 0.82rem;
-        }
-
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.07); padding-top: 28px; max-width: 1440px; margin: 0 auto; flex-wrap: wrap; gap: 16px; }
+        .footer-bottom p { color: rgba(255,255,255,0.6); font-size: 0.82rem; } /* Improved contrast */
         .footer-bottom-links { display: flex; gap: 24px; }
-
-        .footer-bottom-links a {
-            color: rgba(255,255,255,0.35);
-            font-size: 0.82rem;
-            transition: color var(--t-fast);
-        }
-
-        .footer-bottom-links a:hover { color: rgba(255,255,255,0.75); }
+        .footer-bottom-links a { color: rgba(255,255,255,0.6); font-size: 0.82rem; transition: color var(--t-fast); } /* Improved contrast */
+        .footer-bottom-links a:hover { color: rgba(255,255,255,0.95); }
 
         /* ============================================================
            RESPONSIVE
         ============================================================ */
         @media (max-width: 1150px) {
             .hamburger { display: flex; }
-            .nav-wrapper {
-                position: fixed; top: 0; right: -100%; width: 100%; height: 100dvh;
-                background: rgba(10, 10, 10, 0.25); 
-                backdrop-filter: blur(20px); 
-                -webkit-backdrop-filter: blur(20px);
-                flex-direction: column; justify-content: center; align-items: center;
-                transition: right var(--t-base) var(--ease); gap: 28px; z-index: 100;
-            }
+            .nav-wrapper { position: fixed; top: 0; right: -100%; width: 100%; height: 100dvh; background: rgba(10, 10, 10, 0.25); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); flex-direction: column; justify-content: center; align-items: center; transition: right var(--t-base) var(--ease); gap: 28px; z-index: 100; }
             .nav-wrapper.active { right: 0; }
             nav { flex-direction: column; align-items: center; gap: 20px; }
             nav a { font-size: 1.15rem; opacity: 0.9; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
@@ -915,15 +396,15 @@
 
     <!-- HEADER / NAVBAR -->
     <header>
-        <!-- Modified to directly link to homepage -->
         <a href="https://sicklecellawarenessfoundation.org" class="logo" id="header-logo">
-            <img src="https://primary.jwwb.nl/public/t/e/b/temp-phgcdwbfzcsnurmrysqy/image-2-standard.jpg" alt="SCASF Logo" id="logo-butterfly">
+            <img src="https://primary.jwwb.nl/public/t/e/b/temp-phgcdwbfzcsnurmrysqy/image-2-standard.jpg" alt="SCASF Logo" width="34" height="34" id="logo-butterfly">
             <span class="logo-text">SCASF</span>
         </a>
         
-        <div class="hamburger" id="hamburger" aria-label="Toggle menu" role="button" aria-expanded="false">
+        <!-- Changed to a native button element resolving the ARIA prohibited attribute error -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
             <span></span><span></span><span></span>
-        </div>
+        </button>
         <div class="nav-wrapper" id="nav-wrapper">
             <nav>
                 <a href="https://sicklecellawarenessfoundation.org/">Home</a>
@@ -966,7 +447,8 @@
                     </div>
                 </div>
                 <div class="card-content-wrapper" id="card-content-wrapper">
-                    <h3 id="card-title">Our mission</h3>
+                    <!-- Adjusted from <h3> to <h2> to maintain sequential semantic heading order -->
+                    <h2 id="card-title">Our mission</h2>
                     <p id="card-text">Sickle Cell Awareness &amp; Support Foundation exists to amplify real stories, educate with honesty, and advocate for inclusive schools, workplaces, and communities where people living with sickle cell are supported with dignity and understanding.</p>
                     <a href="https://sicklecellawarenessfoundation.org/about" class="learn-more">Learn more →</a>
                 </div>
@@ -1011,10 +493,11 @@
             <div class="card-grid story-grid">
                 <div class="ui-card reveal" style="transition-delay: 0.1s;">
                     <div class="card-img-wrap">
-                        <div class="card-badge" aria-label="Highlighted Step">
+                        <!-- Added role="img" to badge DIV for ARIA label compliance -->
+                        <div class="card-badge" role="img" aria-label="Highlighted Step">
                             <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
                         </div>
-                        <img src="https://i.ibb.co/HpBrD9DJ/4918845.webp" alt="Origin abstract art representation">
+                        <img src="https://i.ibb.co/HpBrD9DJ/4918845.webp" alt="Origin abstract art representation" loading="lazy" decoding="async">
                     </div>
                     <div class="card-content">
                         <h3 class="card-title">Origin</h3>
@@ -1026,10 +509,10 @@
 
                 <div class="ui-card reveal" style="transition-delay: 0.2s;">
                     <div class="card-img-wrap">
-                        <div class="card-badge" aria-label="Highlighted Step">
+                        <div class="card-badge" role="img" aria-label="Highlighted Step">
                             <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
                         </div>
-                        <img src="https://i.ibb.co/27QKH3hB/3746276.webp" alt="Shifting Focus art">
+                        <img src="https://i.ibb.co/27QKH3hB/3746276.webp" alt="Shifting Focus art" loading="lazy" decoding="async">
                     </div>
                     <div class="card-content">
                         <h3 class="card-title">Shifting focus</h3>
@@ -1041,10 +524,10 @@
 
                 <div class="ui-card dark-bleed reveal" style="transition-delay: 0.3s;">
                     <div class="card-img-wrap tall">
-                        <div class="card-badge" aria-label="Highlighted Step">
+                        <div class="card-badge" role="img" aria-label="Highlighted Step">
                             <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
                         </div>
-                        <img src="https://i.ibb.co/PGbTPCkv/blake-wisz-97-ZU-rc-Jjl-Q-unsplash.jpg" alt="Choosing Hope">
+                        <img src="https://i.ibb.co/PGbTPCkv/blake-wisz-97-ZU-rc-Jjl-Q-unsplash.jpg" alt="Choosing Hope" loading="lazy" decoding="async">
                     </div>
                     <div class="card-content">
                         <h3 class="card-title">Choosing hope</h3>
@@ -1061,10 +544,10 @@
 
                 <div class="ui-card reveal" style="transition-delay: 0.4s;">
                     <div class="card-img-wrap">
-                        <div class="card-badge" aria-label="Highlighted Step">
+                        <div class="card-badge" role="img" aria-label="Highlighted Step">
                             <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
                         </div>
-                        <img src="https://i.ibb.co/Wdy67Qt/5648801.webp" alt="Advocacy action graphic">
+                        <img src="https://i.ibb.co/Wdy67Qt/5648801.webp" alt="Advocacy action graphic" loading="lazy" decoding="async">
                     </div>
                     <div class="card-content">
                         <h3 class="card-title">Advocacy in action</h3>
@@ -1088,7 +571,7 @@
                             <p style="margin: 0;">SCASF is not about pretending challenges don't exist. It's about acknowledging them while still choosing hope, possibility, and growth. It's a reminder that life does not stop at a diagnosis and that no one has to navigate this journey alone. Whether you are here to learn, to share, or simply to listen, you are welcome.</p>
                         </div>
                         <div class="founder-author" style="display: flex; align-items: center; gap: 16px; margin-top: auto;">
-                            <img src="https://i.ibb.co/hx3D72r4/IMG-20260511-WA0004.jpg" alt="Weyinmi Eyetsemitan" style="width: 52px; height: 52px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                            <img src="https://i.ibb.co/hx3D72r4/IMG-20260511-WA0004.jpg" alt="Weyinmi Eyetsemitan" style="width: 52px; height: 52px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" loading="lazy" decoding="async">
                             <div>
                                 <div style="font-variation-settings: 'wght' 650; color: var(--text-dark);">Weyinmi</div>
                                 <div style="font-size: 0.85rem; color: var(--text-muted);">Founder, SCASF</div>
@@ -1113,10 +596,11 @@
 
             <div class="team-grid">
                 <div class="team-member-card reveal" style="transition-delay:0.05s">
-                    <img src="https://i.ibb.co/hx3D72r4/IMG-20260511-WA0004.jpg" alt="Weyinmi Eyetsemitan">
+                    <img src="https://i.ibb.co/hx3D72r4/IMG-20260511-WA0004.jpg" alt="Weyinmi Eyetsemitan" loading="lazy" decoding="async">
                     <div class="team-card-overlay">
                         <div class="team-info">
-                            <h4>Weyinmi Eyetsemitan</h4>
+                            <!-- Shifted from H4 to H3 to adhere to heading hierarchy best practices -->
+                            <h3>Weyinmi Eyetsemitan</h3>
                             <p>Founder</p>
                         </div>
                         <div class="team-footer">
@@ -1126,10 +610,10 @@
                 </div>
 
                 <div class="team-member-card reveal" style="transition-delay:0.10s">
-                    <img src="https://primary.jwwb.nl/public/t/e/b/temp-phgcdwbfzcsnurmrysqy/image-high-vfqexk.jpg?enable-io=true&enable=upscale&crop=1%3A1&width=800" alt="Daniel Eyetsemitan" style="object-position: center 10%;">
+                    <img src="https://primary.jwwb.nl/public/t/e/b/temp-phgcdwbfzcsnurmrysqy/image-high-vfqexk.jpg?enable-io=true&enable=upscale&crop=1%3A1&width=800" alt="Daniel Eyetsemitan" style="object-position: center 10%;" loading="lazy" decoding="async">
                     <div class="team-card-overlay">
                         <div class="team-info">
-                            <h4>Daniel Eyetsemitan</h4>
+                            <h3>Daniel Eyetsemitan</h3>
                             <p>Chair (Chair of Trustees)</p>
                         </div>
                         <div class="team-footer">
@@ -1139,10 +623,10 @@
                 </div>
 
                 <div class="team-member-card reveal" style="transition-delay:0.15s">
-                    <img src="https://i.ibb.co/4nNdWSvm/IMG-20260511-WA0002.jpg" alt="Ofeoritse Eyetsemitan">
+                    <img src="https://i.ibb.co/4nNdWSvm/IMG-20260511-WA0002.jpg" alt="Ofeoritse Eyetsemitan" loading="lazy" decoding="async">
                     <div class="team-card-overlay">
                         <div class="team-info">
-                            <h4>Ofeoritse Eyetsemitan</h4>
+                            <h3>Ofeoritse Eyetsemitan</h3>
                             <p>Treasurer</p>
                         </div>
                         <div class="team-footer">
@@ -1152,10 +636,10 @@
                 </div>
 
                 <div class="team-member-card reveal" style="transition-delay:0.20s">
-                    <img src="https://i.ibb.co/8L2Xr2Lp/IMG-20260511-WA0003.jpg" alt="Obehi Agbonifo">
+                    <img src="https://i.ibb.co/8L2Xr2Lp/IMG-20260511-WA0003.jpg" alt="Obehi Agbonifo" loading="lazy" decoding="async">
                     <div class="team-card-overlay">
                         <div class="team-info">
-                            <h4>Obehi Agbonifo</h4>
+                            <h3>Obehi Agbonifo</h3>
                             <p>Communications/Marketing Trustee</p>
                         </div>
                         <div class="team-footer">
@@ -1165,10 +649,10 @@
                 </div>
 
                 <div class="team-member-card reveal" style="transition-delay:0.25s">
-                    <img src="https://i.ibb.co/TB3p4YnJ/IMG-20260509-WA0007.jpg" alt="Vivianne Thomas" style="object-position: top center;">
+                    <img src="https://i.ibb.co/TB3p4YnJ/IMG-20260509-WA0007.jpg" alt="Vivianne Thomas" style="object-position: top center;" loading="lazy" decoding="async">
                     <div class="team-card-overlay">
                         <div class="team-info">
-                            <h4>Vivianne Thomas</h4>
+                            <h3>Vivianne Thomas</h3>
                             <p>Programmes/Operations Trustee</p>
                         </div>
                         <div class="team-footer">
@@ -1177,12 +661,11 @@
                     </div>
                 </div>
 
-                <!-- Moved Trustee without photo to the end -->
                 <div class="team-member-card reveal" style="transition-delay:0.30s">
                     <svg class="placeholder-svg" viewBox="0 0 24 24"><path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"></path></svg>
                     <div class="team-card-overlay">
                         <div class="team-info">
-                            <h4>Naomi Efevberha</h4>
+                            <h3>Naomi Efevberha</h3>
                             <p>Fundraising/Partnerships Trustee</p>
                         </div>
                         <div class="team-footer">
@@ -1193,7 +676,6 @@
             </div>
         </section>
 
-        
     <!-- LATEST STORIES SECTION -->
     <section class="ui-section bg-alt">
         <div class="section-header reveal">
@@ -1224,7 +706,6 @@
             </div>
         </div>
     </section>
-    
 
         <!-- FAQ SECTION -->
         <section class="ui-section" id="faq">
@@ -1326,7 +807,7 @@
         <div class="footer-grid">
             <div class="footer-brand-col">
                 <div class="footer-logo">
-                    <img src="https://primary.jwwb.nl/public/t/e/b/temp-phgcdwbfzcsnurmrysqy/image-2-standard.jpg" alt="SCASF Logo">
+                    <img src="https://primary.jwwb.nl/public/t/e/b/temp-phgcdwbfzcsnurmrysqy/image-2-standard.jpg" alt="SCASF Logo" loading="lazy" decoding="async">
                     SCASF
                 </div>
                 <p>Sickle Cell Awareness &amp; Support Foundation.<br>Empowering lives beyond the crisis through authentic stories, education, and inclusive advocacy.</p>
@@ -1350,7 +831,8 @@
             </div>
 
             <div class="footer-col">
-                <h4>Foundation</h4>
+                <!-- Shifted to H3 to follow H2 'Stay in the loop' in hierarchy logic -->
+                <h3>Foundation</h3>
                 <ul>
                     <li><a href="https://sicklecellawarenessfoundation.org/about">About us</a></li>
                     <li><a href="https://sicklecellawarenessfoundation.org/stories">Our stories</a></li>
@@ -1360,7 +842,7 @@
             </div>
 
             <div class="footer-col">
-                <h4>Community</h4>
+                <h3>Community</h3>
                 <ul>
                     <li><a href="https://sicklecellawarenessfoundation.org/community">Community hub</a></li>
                     <li><a href="#">Events &amp; workshops</a></li>
@@ -1370,7 +852,7 @@
             </div>
 
             <div class="footer-col">
-                <h4>Resources</h4>
+                <h3>Resources</h3>
                 <ul>
                     <li><a href="https://sicklecellawarenessfoundation.org/learning">Learning center</a></li>
                     <li><a href="https://sicklecellawarenessfoundation.org/stories">Articles &amp; news</a></li>
@@ -1391,13 +873,12 @@
     </footer>
 
     <script>
-        // LOGO REVEAL - Updated for direct link navigation
+        // LOGO REVEAL
         const headerLogo = document.getElementById('header-logo');
         const logoButterfly = document.getElementById('logo-butterfly');
         let logoTimer;
         if (logoButterfly && headerLogo) {
             logoButterfly.addEventListener('click', (e) => {
-                // Ensure it reveals the text if clicked but still navigates as normal link behavior
                 e.stopPropagation();
                 headerLogo.classList.add('show-text');
                 clearTimeout(logoTimer);
