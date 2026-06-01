@@ -1,0 +1,28 @@
+name: Update Repository Links
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Replace old links with new links
+        run: |
+          echo "Updating Facebook links..."
+          find . -type f -not -path '*/.*' -exec sed -i 's|https://facebook.com/Beyondthecrisis|https://www.facebook.com/scasf_1|g' {} +
+
+          echo "Updating Instagram links..."
+          find . -type f -not -path '*/.*' -exec sed -i 's|https://instagram.com/beyond_the_crisis|https://www.instagram.com/scasf_1|g' {} +
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "automated: exact-match social link updates"
+          branch: ${{ github.head_ref || github.ref_name }}
