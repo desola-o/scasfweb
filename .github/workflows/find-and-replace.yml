@@ -1,0 +1,32 @@
+name: Global Find and Replace
+
+# This allows you to trigger the workflow manually from the GitHub Actions tab
+on: 
+  workflow_dispatch:
+
+permissions:
+  contents: write # Required to allow the bot to push commits
+
+jobs:
+  update-pages:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Find and Replace Text and URLs
+        run: |
+          # Find all web files and replace the text/links
+          # The 'gI' at the end makes it case-insensitive (e.g., catches Community Hub or community hub)
+          
+          find . -type f \( -name "*.html" -o -name "*.md" -o -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.tsx" -o -name "*.json" \) -exec sed -i \
+            -e 's/community hub/Our Impact/gI' \
+            -e 's|https://www.facebook.com/Beyondthecrisis|https://www.facebook.com/SCASF_1|gI' \
+            -e 's|https://www.instagram.com/beyond_the_crisis|https://www.instagram.com/scasf_1|gI' {} +
+
+      - name: Commit and Push Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Automated update: Nav bar and Social Media Links"
+          branch: main # Change this to 'master' if your repo still uses master instead of main
