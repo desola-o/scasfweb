@@ -1,41 +1,28 @@
-name: Bulk Update Website Links
+name: Update Repository Links
 
 on:
-  workflow_dispatch:
-
-permissions:
-  contents: write
+  workflow_dispatch: # This allows you to run it manually from the Actions tab
 
 jobs:
   update-links:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Find and Replace Old Links
+      - name: Replace old links with new links
         run: |
-          # We use grep -I to ignore binary files (images/pdfs) so the script doesn't crash.
-          # The "|| true" at the end prevents the step from failing if a link isn't found.
-          
-          grep -rlI --exclude-dir=.git "https://www.facebook.com/Beyondthecrisis" . | xargs -r sed -i 's#https://www.facebook.com/Beyondthecrisis#https://www.facebook.com/scasf_1#g' || true
+          echo "Updating Facebook links..."
+          find . -type f -not -path '*/.*' -exec sed -i 's|https://www.facebook.com/Beyondthecrisis|https://www.facebook.com/scasf_1|g' {} +
 
-          grep -rlI --exclude-dir=.git "https://www.instagram.com/beyond_the_crisis" . | xargs -r sed -i 's#https://www.instagram.com/beyond_the_crisis#https://www.instagram.com/scasf_1#g' || true
+          echo "Updating Instagram links..."
+          find . -type f -not -path '*/.*' -exec sed -i 's|https://www.instagram.com/beyond_the_crisis|https://www.instagram.com/scasf_1|g' {} +
 
-          grep -rlI --exclude-dir=.git "sicklecellawarenessfoundation.org/community" . | xargs -r sed -i 's#sicklecellawarenessfoundation.org/community#sicklecellawarenessfoundation.org/impact#g' || true
+          echo "Updating Impact links..."
+          find . -type f -not -path '*/.*' -exec sed -i 's|sicklecellawarenessfoundation.org/community|sicklecellawarenessfoundation.org/impact|g' {} +
 
-      - name: Commit and Push Changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          git add .
-          
-          # Check if any files were modified
-          if ! git diff --staged --quiet; then
-            git commit -m "Update social media and impact links across all pages"
-            # Attempt to push. If it fails, print a helpful error message.
-            git push || { echo "❌ Failed to push. You likely have Branch Protection rules enabled on 'main' preventing direct pushes."; exit 1; }
-          else
-            echo "✅ No old links were found. They may have already been updated, or the text didn't match exactly."
-          fi
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "automated: update social links and top navbar impact link"
+          branch: ${{ github.head_ref || github.ref_name }}
