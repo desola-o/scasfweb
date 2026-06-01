@@ -1,0 +1,25 @@
+name: Update Impact Link Only
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-impact-link:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Replace old impact link with new link
+        run: |
+          echo "Updating all leftover Impact links..."
+          find . -type f -not -path '*/.*' -exec sed -i 's|sicklecellawarenessfoundation.org/community|sicklecellawarenessfoundation.org/impact|g' {} +
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "automated: global update for top navbar impact link"
+          branch: ${{ github.head_ref || github.ref_name }}
