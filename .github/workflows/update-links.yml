@@ -1,0 +1,43 @@
+name: Bulk Update Website Links
+
+on:
+  workflow_dispatch: # This allows you to trigger the action manually from the "Actions" tab
+
+permissions:
+  contents: write    # Grants permission for the bot to push changes to your repo
+
+jobs:
+  update-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Find and Replace Old Links
+        run: |
+          # 1. Update Facebook Link
+          find . -type f ! -path "*/\.git/*" -exec sed -i 's#https://www.facebook.com/Beyondthecrisis#https://www.facebook.com/scasf_1#g' {} +
+
+          # 2. Update Instagram Link
+          find . -type f ! -path "*/\.git/*" -exec sed -i 's#https://www.instagram.com/beyond_the_crisis#https://www.instagram.com/scasf_1#g' {} +
+
+          # 3. Update Impact Link
+          find . -type f ! -path "*/\.git/*" -exec sed -i 's#sicklecellawarenessfoundation.org/community#sicklecellawarenessfoundation.org/impact#g' {} +
+
+      - name: Commit and Push Changes
+        run: |
+          # Set up the bot user to commit the changes
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Stage all changed files
+          git add .
+          
+          # Check if there are any changes to commit. If yes, commit and push!
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "Update social media and impact links across all pages"
+            git push
+            echo "Links updated successfully!"
+          else
+            echo "No old links were found. Nothing to update."
+          fi
