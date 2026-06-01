@@ -1,10 +1,10 @@
 name: Bulk Update Website Links
 
 on:
-  workflow_dispatch: # This allows you to trigger the action manually from the "Actions" tab
+  workflow_dispatch:
 
 permissions:
-  contents: write    # Grants permission for the bot to push changes to your repo
+  contents: write
 
 jobs:
   update-links:
@@ -15,29 +15,27 @@ jobs:
 
       - name: Find and Replace Old Links
         run: |
-          # 1. Update Facebook Link
-          find . -type f ! -path "*/\.git/*" -exec sed -i 's#https://www.facebook.com/Beyondthecrisis#https://www.facebook.com/scasf_1#g' {} +
+          # We use grep -I to ignore binary files (images/pdfs) so the script doesn't crash.
+          # The "|| true" at the end prevents the step from failing if a link isn't found.
+          
+          grep -rlI --exclude-dir=.git "https://www.facebook.com/Beyondthecrisis" . | xargs -r sed -i 's#https://www.facebook.com/Beyondthecrisis#https://www.facebook.com/scasf_1#g' || true
 
-          # 2. Update Instagram Link
-          find . -type f ! -path "*/\.git/*" -exec sed -i 's#https://www.instagram.com/beyond_the_crisis#https://www.instagram.com/scasf_1#g' {} +
+          grep -rlI --exclude-dir=.git "https://www.instagram.com/beyond_the_crisis" . | xargs -r sed -i 's#https://www.instagram.com/beyond_the_crisis#https://www.instagram.com/scasf_1#g' || true
 
-          # 3. Update Impact Link
-          find . -type f ! -path "*/\.git/*" -exec sed -i 's#sicklecellawarenessfoundation.org/community#sicklecellawarenessfoundation.org/impact#g' {} +
+          grep -rlI --exclude-dir=.git "sicklecellawarenessfoundation.org/community" . | xargs -r sed -i 's#sicklecellawarenessfoundation.org/community#sicklecellawarenessfoundation.org/impact#g' || true
 
       - name: Commit and Push Changes
         run: |
-          # Set up the bot user to commit the changes
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Stage all changed files
           git add .
           
-          # Check if there are any changes to commit. If yes, commit and push!
-          if ! git diff-index --quiet HEAD; then
+          # Check if any files were modified
+          if ! git diff --staged --quiet; then
             git commit -m "Update social media and impact links across all pages"
-            git push
-            echo "Links updated successfully!"
+            # Attempt to push. If it fails, print a helpful error message.
+            git push || { echo "❌ Failed to push. You likely have Branch Protection rules enabled on 'main' preventing direct pushes."; exit 1; }
           else
-            echo "No old links were found. Nothing to update."
+            echo "✅ No old links were found. They may have already been updated, or the text didn't match exactly."
           fi
